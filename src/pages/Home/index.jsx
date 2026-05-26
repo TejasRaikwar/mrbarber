@@ -3,6 +3,7 @@ import ServicesSection from "@/components/services/ServicesSection"
 import BeforeAfterSection from "@/components/transformations/BeforeAfterSection"
 import HairProfilesSection from "@/components/profiles/HairProfilesSection"
 import ReviewsSection from "@/components/reviews/ReviewsSection"
+import ContactSection from "@/components/contact/ContactSection"
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <BeforeAfterSection />
       <HairProfilesSection />
       <ReviewsSection />
+      <ContactSection />
     </>
   )
 }
