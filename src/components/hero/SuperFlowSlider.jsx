@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -11,7 +11,6 @@ const SuperFlowSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [[page, direction], setPage] = useState([0, 0])
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const autoplayRef = useRef(null)
 
   const activeIndex = page
 
@@ -36,31 +35,11 @@ const SuperFlowSlider = () => {
     setPage([index, dir])
   }
 
-  const startAutoplay = () => {
-    stopAutoplay()
-    autoplayRef.current = setInterval(() => {
-      handleNext()
-    }, 6500)
-  }
-
-  const stopAutoplay = () => {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current)
-    }
-  }
-
-  useEffect(() => {
-    startAutoplay()
-    return () => stopAutoplay()
-  }, [page, isTransitioning])
-
   const currentSlide = slides[activeIndex]
 
   return (
     <section 
       className="relative h-screen w-full overflow-hidden bg-black select-none"
-      onMouseEnter={stopAutoplay}
-      onMouseLeave={startAutoplay}
     >
       {/* Background Slices Layer */}
       <div className="absolute inset-0 z-0 h-full w-full">
