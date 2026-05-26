@@ -1,0 +1,70 @@
+.reviews-marquee {
+    width: 100%;
+    overflow: hidden;
+    /* Fade out edges */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        black 80px,
+        black calc(100% - 80px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        black 80px,
+        black calc(100% - 80px),
+        transparent 100%
+    );
+}
+
+.reviews-marquee__track {
+    display: flex;
+    width: max-content;
+    gap: 1.75rem;
+    padding: 0.5rem 1rem;
+    animation: reviews-scroll 50s linear infinite;
+    will-change: transform;
+}
+
+.reviews-marquee:hover .reviews-marquee__track {
+    animation-play-state: paused;
+}
+
+.reviews-marquee__item {
+    flex: 0 0 auto;
+    width: 360px;
+    display: flex;
+}
+
+.reviews-marquee__item > * {
+    width: 100%;
+}
+
+@keyframes reviews-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Move exactly half the track (one full copy of the list) */
+        transform: translateX(calc(-50% - 0.875rem));
+    }
+}
+
+@media (max-width: 640px) {
+    .reviews-marquee__item {
+        width: 300px;
+    }
+    .reviews-marquee__track {
+        animation-duration: 40s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reviews-marquee__track {
+        animation: none;
+    }
+    .reviews-marquee {
+        overflow-x: auto;
+    }
+}
