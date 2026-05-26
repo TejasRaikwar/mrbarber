@@ -33,20 +33,6 @@ const HairProfileCard = ({ item, index }) => {
                     <div className="absolute left-4 top-4 z-20 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white">
                         Before
                     </div>
-
-                    {/* Highlighted problem area (yellow dashed oval) */}
-                    <div
-                        className="absolute z-10 pointer-events-none"
-                        style={{
-                            top: item.highlight.top,
-                            left: item.highlight.left,
-                            width: item.highlight.width,
-                            height: item.highlight.height,
-                            transform: "translate(-50%, -50%)"
-                        }}
-                    >
-                        <div className="w-full h-full rounded-[50%] border-[3px] border-dashed border-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.35)] animate-pulse-slow" />
-                    </div>
                 </div>
 
                 {/* After Image (smaller, bottom-right inset) */}
