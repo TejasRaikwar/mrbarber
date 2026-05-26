@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react"
 import { Scissors } from "lucide-react"
-import { navLinks } from "./navLinks"
 import Navlinks from "./Navlinks.jsx"
 import MobileMenu from "./MobileMenu"
 
 const Navbar = () => {
+    const [scrolled, setScrolled] = useState(false)
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 40)
+        onScroll()
+        window.addEventListener("scroll", onScroll, { passive: true })
+        return () => window.removeEventListener("scroll", onScroll)
+    }, [])
+
     return (
-        <header className="absolute top-0 left-0 w-full z-50 backdrop-blur-md border-b border-white/10">
+        <header
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+                scrolled
+                    ? "bg-black/70 backdrop-blur-lg border-b border-white/10"
+                    : "bg-transparent border-b border-transparent"
+            }`}
+        >
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
                 {/* Logo */}
@@ -33,4 +48,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-

@@ -1,22 +1,27 @@
+// `hash` is the section id on the home page (empty string scrolls to top)
 export const navLinks = [
     {
-        label:"Home",
-        path:"/"
+        label: "Home",
+        hash: ""
     },
     {
-        label:"About",
-        path:"/about"
+        label: "Services",
+        hash: "services"
     },
     {
-        label:"Services",
-        path:"/services"
+        label: "Transformations",
+        hash: "transformations"
     },
     {
-        label:"Contact",
-        path:"/contact"
+        label: "Profiles",
+        hash: "profiles"
     },
     {
-        label:"Gallery",
-        path:"/gallery"
+        label: "Reviews",
+        hash: "reviews"
+    },
+    {
+        label: "Contact",
+        hash: "contact"
     }
 ]

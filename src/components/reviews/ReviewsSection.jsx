@@ -11,7 +11,7 @@ const ReviewsSection = () => {
     const loop = [...reviews, ...reviews]
 
     return (
-        <section className="bg-black pt-12 pb-24 relative overflow-hidden">
+        <section id="reviews" className="bg-black pt-12 pb-24 relative overflow-hidden scroll-mt-20">
             {/* Subtle background glow */}
             <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 

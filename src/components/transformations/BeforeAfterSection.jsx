@@ -3,7 +3,7 @@ import { transformations } from "./transformations"
 
 const BeforeAfterSection = () => {
     return (
-        <section className="bg-black pt-12 pb-24">
+        <section id="transformations" className="bg-black pt-12 pb-24 scroll-mt-20">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Heading */}
                 <div className="text-center mb-12">

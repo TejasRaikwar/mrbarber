@@ -3,7 +3,7 @@ import { hairProfiles } from "./profiles"
 
 const HairProfilesSection = () => {
     return (
-        <section className="bg-black pt-12 pb-24">
+        <section id="profiles" className="bg-black pt-12 pb-24 scroll-mt-20">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Heading */}
                 <div className="text-center mb-14">
