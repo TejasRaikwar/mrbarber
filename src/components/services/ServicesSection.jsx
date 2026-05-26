@@ -3,23 +3,23 @@ import { services } from "./services"
 
 const ServicesSection = () => {
     return (
-        <section id="services" className="bg-black pt-20 pb-24 relative overflow-hidden scroll-mt-20">
+        <section id="services" className="bg-black py-16 relative overflow-hidden scroll-mt-20">
             {/* Subtle ambient glow */}
             <div className="absolute top-0 right-0 w-125 h-125 bg-yellow-500/4 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-125 h-125 bg-yellow-500/3 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 relative">
                 {/* Heading */}
-                <div className="text-center mb-14">
-                    <p className="text-yellow-500 uppercase tracking-[5px] mb-4">
+                <div className="text-center mb-10">
+                    <p className="text-yellow-500 uppercase tracking-[5px] mb-3 text-sm">
                         Our Services
                     </p>
 
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                         Everything Your Hair Needs
                     </h2>
 
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-gray-400 max-w-2xl mx-auto">
                         From premium hair systems to expert styling — a full-service
                         studio crafted around your look and comfort.
                     </p>

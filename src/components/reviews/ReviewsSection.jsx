@@ -11,22 +11,22 @@ const ReviewsSection = () => {
     const loop = [...reviews, ...reviews]
 
     return (
-        <section id="reviews" className="bg-black pt-12 pb-24 relative overflow-hidden scroll-mt-20">
+        <section id="reviews" className="bg-black py-16 relative overflow-hidden scroll-mt-20">
             {/* Subtle background glow */}
             <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto px-6 relative mb-14">
+            <div className="max-w-7xl mx-auto px-6 relative mb-10">
                 {/* Heading */}
                 <div className="text-center">
-                    <p className="text-yellow-500 uppercase tracking-[5px] mb-4">
+                    <p className="text-yellow-500 uppercase tracking-[5px] mb-3 text-sm">
                         Testimonials
                     </p>
 
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                         What Our Customers Say
                     </h2>
 
-                    <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-gray-400 max-w-2xl mx-auto">
                         Real stories from men who&apos;ve transformed their look —
                         averaging{" "}
                         <span className="text-yellow-500 font-semibold">
