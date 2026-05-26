@@ -14,7 +14,7 @@ const MobileMenu = () => {
                     <Menu className="text-white" />
                 </SheetTrigger>
                 <SheetContent className="bg-black border-none">
-                    <div className="flex flex-col gap-6 mt-10">
+                    <div className="flex flex-col gap-6 mt-10 px-7">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.path}
