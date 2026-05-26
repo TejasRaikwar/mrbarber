@@ -1,0 +1,33 @@
+.marquee-strip {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.95rem 0;
+}
+
+.marquee-strip__track {
+    display: flex;
+    width: max-content;
+    gap: 3rem;
+    animation: marquee-strip-scroll 32s linear infinite;
+    will-change: transform;
+}
+
+.marquee-strip__item {
+    flex: 0 0 auto;
+}
+
+@keyframes marquee-strip-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Translate exactly half the doubled list + one gap */
+        transform: translateX(calc(-50% - 1.5rem));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-strip__track {
+        animation: none;
+    }
+}

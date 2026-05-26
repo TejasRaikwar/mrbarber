@@ -1,49 +1,75 @@
-import { motion } from "framer-motion"
-
 const AmbientBackground = () => {
     return (
         <div className="fixed inset-0 -z-10 overflow-hidden bg-black pointer-events-none">
-            {/* Faint dot grid */}
+            {/* Diagonal hatching — fine premium texture */}
             <div
-                className="absolute inset-0 opacity-[0.035]"
+                className="absolute inset-0 opacity-[0.04]"
                 style={{
-                    backgroundImage:
-                        "radial-gradient(circle, white 1px, transparent 1px)",
-                    backgroundSize: "32px 32px"
+                    backgroundImage: `repeating-linear-gradient(
+                        45deg,
+                        rgba(255,255,255,0.6) 0px,
+                        rgba(255,255,255,0.6) 1px,
+                        transparent 1px,
+                        transparent 10px
+                    )`
                 }}
             />
 
-            {/* Top vignette */}
-            <div className="absolute top-0 inset-x-0 h-[40vh] bg-gradient-to-b from-yellow-500/[0.04] via-transparent to-transparent" />
-
-            {/* Diagonal barber-pole accent */}
+            {/* Crosshatch — second diagonal for woven texture */}
             <div
-                className="absolute top-1/2 -right-32 w-[60vw] h-[140%] -translate-y-1/2 opacity-[0.02] rotate-12"
+                className="absolute inset-0 opacity-[0.025]"
                 style={{
-                    backgroundImage:
-                        "repeating-linear-gradient(90deg, #eab308 0 2px, transparent 2px 80px)"
+                    backgroundImage: `repeating-linear-gradient(
+                        -45deg,
+                        rgba(255,255,255,0.6) 0px,
+                        rgba(255,255,255,0.6) 1px,
+                        transparent 1px,
+                        transparent 10px
+                    )`
                 }}
             />
 
-            {/* Drifting orbs */}
-            <motion.div
-                className="absolute top-[15%] -left-40 w-[28rem] h-[28rem] rounded-full bg-yellow-500/[0.07] blur-3xl"
-                animate={{ x: [0, 80, 0], y: [0, -40, 0] }}
-                transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            {/* SVG film grain — adds organic noise */}
+            <svg
+                className="absolute inset-0 w-full h-full opacity-[0.07]"
+                aria-hidden="true"
+            >
+                <filter id="ambient-noise">
+                    <feTurbulence
+                        type="fractalNoise"
+                        baseFrequency="0.9"
+                        numOctaves="3"
+                        stitchTiles="stitch"
+                    />
+                    <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+                </filter>
+                <rect width="100%" height="100%" filter="url(#ambient-noise)" />
+            </svg>
+
+            {/* Warm yellow color wash from upper-left for depth */}
+            <div
+                className="absolute inset-0"
+                style={{
+                    background:
+                        "radial-gradient(ellipse at 20% 0%, rgba(234,179,8,0.08), transparent 50%)"
+                }}
             />
-            <motion.div
-                className="absolute top-[55%] -right-40 w-[32rem] h-[32rem] rounded-full bg-yellow-500/[0.05] blur-3xl"
-                animate={{ x: [0, -60, 0], y: [0, 40, 0] }}
-                transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
+
+            {/* Cool counter-wash from lower-right */}
+            <div
+                className="absolute inset-0"
+                style={{
+                    background:
+                        "radial-gradient(ellipse at 80% 100%, rgba(234,179,8,0.06), transparent 55%)"
+                }}
             />
-            <motion.div
-                className="absolute bottom-[8%] left-[35%] w-[24rem] h-[24rem] rounded-full bg-yellow-500/[0.04] blur-3xl"
-                animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-                transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 5
+
+            {/* Vignette — darken edges for cinematic depth */}
+            <div
+                className="absolute inset-0"
+                style={{
+                    background:
+                        "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%)"
                 }}
             />
         </div>
