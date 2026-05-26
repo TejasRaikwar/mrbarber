@@ -8,16 +8,17 @@ const LocationCard = ({ item, index }) => {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
             transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-80px" }}
-            className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+            className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
         >
             {/* Image */}
             <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden">
                 <img
                     src={item.image}
                     alt={`${item.city} studio`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     draggable={false}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />

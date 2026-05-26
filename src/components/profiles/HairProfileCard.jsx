@@ -5,9 +5,10 @@ const HairProfileCard = ({ item, index }) => {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -6 }}
             transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-50px" }}
-            className="group"
+            className="group cursor-pointer"
         >
             {/* Visual Frame */}
             <div className="relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/30 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl">
@@ -36,7 +37,7 @@ const HairProfileCard = ({ item, index }) => {
                 </div>
 
                 {/* After Image (smaller, bottom-right inset) */}
-                <div className="absolute bottom-5 right-5 w-[45%] h-[42%] rounded-2xl overflow-hidden border-2 border-yellow-500/40 shadow-2xl z-20">
+                <div className="absolute bottom-5 right-5 w-[45%] h-[42%] rounded-2xl overflow-hidden border-2 border-yellow-500/40 shadow-2xl z-20 transition-all duration-500 group-hover:scale-105 group-hover:border-yellow-500">
                     <img
                         src={item.after}
                         alt={`${item.title} - after`}
