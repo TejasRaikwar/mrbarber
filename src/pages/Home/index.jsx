@@ -1,11 +1,11 @@
-import HeroSlider from "@/components/hero/HeroSlider"
+import SuperFlowSlider from "@/components/hero/SuperFlowSlider"
 
 const Home = () => {
   return (
     <>
-      <HeroSlider />
+      <SuperFlowSlider />
     </>
   )
 }
 
-export default Home
+export default Home
