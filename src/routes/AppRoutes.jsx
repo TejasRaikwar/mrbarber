@@ -4,9 +4,6 @@ import MainLayout from "@/layouts/MainLayout"
 import AdminLayout from "@/layouts/AdminLayout"
 
 import Home from "@/pages/Home"
-import About from "@/pages/About"
-import Gallery from "@/pages/Gallery"
-import Bookings from "@/pages/Bookings"
 
 const AppRoutes = () => {
   return (
@@ -16,9 +13,6 @@ const AppRoutes = () => {
         {/* Public Website */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/bookings" element={<Bookings />} />
         </Route>
 
         {/* Admin */}
