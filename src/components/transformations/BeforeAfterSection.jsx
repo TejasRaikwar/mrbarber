@@ -7,7 +7,7 @@ const BeforeAfterSection = () => {
     if (!transformations || transformations.length === 0) return null
 
     // Card expects `before` / `after`; map API fields.
-    const items = transformations.map((t) => ({
+    const items = transformations.slice(0, 2).map((t) => ({
         id: t.id,
         title: t.title,
         before: t.beforeImageUrl,

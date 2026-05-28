@@ -166,6 +166,11 @@ const AdminLayout = () => {
                     <div className="px-3 py-2 text-xs text-gray-500">
                         Signed in as <span className="text-white">{user?.username}</span>
                     </div>
+                    <NavLink to="/"
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                        <ExternalLink className="w-4 h-4" />
+                        View Website
+                    </NavLink>
                     <button
                         onClick={logout}
                         className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"

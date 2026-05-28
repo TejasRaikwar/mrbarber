@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -25,6 +25,20 @@ const SuperFlowSlider = () => {
     secondaryCtaHref: s.secondaryCtaHref
   }))
 
+  const activeIndex = slides.length > 0 ? page % slides.length : 0
+
+  // Auto-advance every 5 seconds; reset timer whenever user navigates manually
+  useEffect(() => {
+    if (slides.length <= 1) return
+    const id = setTimeout(() => {
+      if (!isTransitioning) {
+        setIsTransitioning(true)
+        setPage([(activeIndex + 1) % slides.length, 1])
+      }
+    }, 5000)
+    return () => clearTimeout(id)
+  }, [activeIndex, isTransitioning, slides.length])
+
   if (slides.length === 0) {
     return (
       <section className="relative h-screen w-full bg-black flex items-center justify-center">
@@ -33,7 +47,6 @@ const SuperFlowSlider = () => {
     )
   }
 
-  const activeIndex = page % slides.length
   const currentSlide = slides[activeIndex]
 
   const handleNext = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
-import { Scissors, Lock, User } from "lucide-react"
+import { Navigate, useNavigate, Link } from "react-router-dom"
+import { Scissors, Lock, User, ExternalLink } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 
 const AdminLogin = () => {
@@ -36,6 +36,7 @@ const AdminLogin = () => {
                 </div>
 
                 <p className="text-gray-400 text-sm mb-8">Sign in to continue.</p>
+
 
                 <form onSubmit={onSubmit} className="space-y-5">
                     <div>
@@ -80,6 +81,14 @@ const AdminLogin = () => {
                         {submitting ? "Signing in…" : "Sign in"}
                     </button>
                 </form>
+
+                <div className="mt-6 pt-5 border-t border-white/10 text-center">
+                    <Link to="/"
+                        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-yellow-500 transition-colors">
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        View main website
+                    </Link>
+                </div>
             </div>
         </div>
     )
