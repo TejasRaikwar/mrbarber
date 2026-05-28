@@ -53,31 +53,37 @@ const BeforeAfterCard = ({ item }) => {
       >
         {/* After Image (Base Layer) */}
         <div className="absolute inset-0 h-full w-full bg-zinc-950">
-          <img 
-            src={item.after} 
-            alt="After transformation" 
-            className="h-full w-full object-cover select-none pointer-events-none"
-          />
-          {/* After Watermark Badge */}
+          {item.after ? (
+            <img
+              src={item.after}
+              alt=""
+              className="h-full w-full object-cover select-none pointer-events-none"
+            />
+          ) : (
+            <div className="h-full w-full flex items-center justify-center text-gray-700 text-sm">No image</div>
+          )}
           <div className="absolute right-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-yellow-500">
             After
           </div>
         </div>
 
         {/* Before Image (Overlay Layer) */}
-        <div 
+        <div
           className="absolute inset-0 h-full w-full z-10"
           style={{
             clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`,
             WebkitClipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`
           }}
         >
-          <img 
-            src={item.before} 
-            alt="Before transformation" 
-            className="h-full w-full object-cover select-none pointer-events-none"
-          />
-          {/* Before Watermark Badge */}
+          {item.before ? (
+            <img
+              src={item.before}
+              alt=""
+              className="h-full w-full object-cover select-none pointer-events-none"
+            />
+          ) : (
+            <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-700 text-sm">No image</div>
+          )}
           <div className="absolute left-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white">
             Before
           </div>

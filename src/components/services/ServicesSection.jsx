@@ -1,8 +1,14 @@
 import ServiceCard from "./ServiceCard"
-import { services } from "./services"
 import SectionHeading from "@/components/ui/SectionHeading"
+import { useSiteContent } from "@/context/SiteContentContext"
+import { resolveIcon } from "@/lib/iconMap"
 
 const ServicesSection = () => {
+    const { services } = useSiteContent()
+    if (!services || services.length === 0) return null
+
+    const items = services.map((s) => ({ ...s, Icon: resolveIcon(s.iconName) }))
+
     return (
         <section id="services" className="py-16 relative scroll-mt-20">
             <div className="max-w-7xl mx-auto px-6 relative">
@@ -13,7 +19,7 @@ const ServicesSection = () => {
                 />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-6">
-                    {services.map((item, index) => (
+                    {items.map((item, index) => (
                         <div
                             key={item.id}
                             className={`lg:col-span-2 ${

@@ -1,12 +1,11 @@
 import { motion } from "framer-motion"
 
-const SuperFlowSlice = ({ 
-  sliceIndex, 
-  clipPath, 
-  direction, 
-  variants, 
-  imageSrc, 
-  imageAlt 
+const SuperFlowSlice = ({
+  sliceIndex,
+  clipPath,
+  direction,
+  variants,
+  imageSrc
 }) => {
   return (
     <motion.div
@@ -32,11 +31,13 @@ const SuperFlowSlice = ({
         transition={{ duration: 7, ease: "easeOut" }}
         className="absolute inset-0 h-full w-full"
       >
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="h-full w-full object-cover select-none pointer-events-none"
-        />
+        {imageSrc && (
+          <img
+            src={imageSrc}
+            alt=""
+            className="h-full w-full object-cover select-none pointer-events-none"
+          />
+        )}
       </motion.div>
       {/* Dynamic Overlay inside slice */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75" />

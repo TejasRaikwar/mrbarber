@@ -20,12 +20,16 @@ const HairProfileCard = ({ item, index }) => {
                         WebkitClipPath: "polygon(0 0, 100% 0, 100% 60%, 60% 100%, 0 100%)"
                     }}
                 >
-                    <img
-                        src={item.before}
-                        alt={`${item.title} - before`}
-                        className="h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-105"
-                        draggable={false}
-                    />
+                    {item.before ? (
+                        <img
+                            src={item.before}
+                            alt=""
+                            className="h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-105"
+                            draggable={false}
+                        />
+                    ) : (
+                        <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-700 text-sm">No image</div>
+                    )}
 
                     {/* Dim overlay for readability */}
                     <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40 pointer-events-none" />
@@ -38,12 +42,16 @@ const HairProfileCard = ({ item, index }) => {
 
                 {/* After Image (smaller, bottom-right inset) */}
                 <div className="absolute bottom-5 right-5 w-[45%] h-[42%] rounded-2xl overflow-hidden border-2 border-yellow-500/40 shadow-2xl z-20 transition-all duration-500 group-hover:scale-105 group-hover:border-yellow-500">
-                    <img
-                        src={item.after}
-                        alt={`${item.title} - after`}
-                        className="h-full w-full object-cover select-none"
-                        draggable={false}
-                    />
+                    {item.after ? (
+                        <img
+                            src={item.after}
+                            alt=""
+                            className="h-full w-full object-cover select-none"
+                            draggable={false}
+                        />
+                    ) : (
+                        <div className="h-full w-full bg-zinc-800 flex items-center justify-center text-gray-600 text-xs">No image</div>
+                    )}
                     {/* After label */}
                     <div className="absolute left-2 top-2 bg-yellow-500 text-black px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                         After

@@ -1,0 +1,40 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.eclipse/
+.classpath
+.project
+.settings/
+*.launch
+.springBeans
+.sts4-cache/
+
+# VS Code
+.vscode/
+
+# Uploaded files (local storage, not for git)
+uploads/
+
+# Environment overrides
+.env
+.env.local
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled output
+*.class
+*.jar
+*.war
+*.ear
+*.nar

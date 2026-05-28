@@ -127,4 +127,10 @@
   html {
     @apply font-sans;
     }
+
+  /* Dark theme for native select dropdowns */
+  select option {
+    background-color: #18181b;
+    color: #ffffff;
+  }
 }

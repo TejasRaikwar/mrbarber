@@ -1,15 +1,28 @@
 import ReviewCard from "./ReviewCard"
-import { reviews } from "./reviews"
 import SectionHeading from "@/components/ui/SectionHeading"
+import { useSiteContent } from "@/context/SiteContentContext"
 import "./reviews.css"
 
 const ReviewsSection = () => {
+    const { reviews } = useSiteContent()
+    if (!reviews || reviews.length === 0) return null
+
+    // Map API → ReviewCard's expected shape
+    const items = reviews.map((r) => ({
+        id: r.id,
+        name: r.authorName,
+        location: r.location,
+        rating: r.rating,
+        quote: r.quote,
+        initials: r.initials,
+        avatarUrl: r.avatarUrl
+    }))
+
     const averageRating = (
-        reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+        items.reduce((sum, r) => sum + r.rating, 0) / items.length
     ).toFixed(1)
 
-    // Duplicate the list so the marquee loops seamlessly
-    const loop = [...reviews, ...reviews]
+    const loop = [...items, ...items]
 
     return (
         <section id="reviews" className="py-16 relative overflow-hidden scroll-mt-20">
@@ -30,7 +43,6 @@ const ReviewsSection = () => {
                 />
             </div>
 
-            {/* Marquee */}
             <div className="reviews-marquee group/marquee relative">
                 <div className="reviews-marquee__track">
                     {loop.map((item, index) => (
