@@ -10,7 +10,7 @@ const StatCard = ({ label, value, icon: Icon, accent = false, danger = false }) 
         danger
             ? { border: "border-red-500/30", iconBg: "bg-red-500/15", icon: "text-red-400", value: "text-red-400" }
             : accent
-            ? { border: "border-yellow-500/30", iconBg: "bg-yellow-500/15", icon: "text-yellow-500", value: "text-yellow-400" }
+            ? { border: "border-(--brand)/30", iconBg: "bg-(--brand)/15", icon: "text-(--brand)", value: "text-(--brand)" }
             : { border: "border-white/10", iconBg: "bg-white/5", icon: "text-gray-400", value: "text-white" }
     return (
         <div className={`bg-zinc-900/60 border ${tone.border} rounded-2xl p-6 flex items-start gap-4`}>

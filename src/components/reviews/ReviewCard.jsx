@@ -8,10 +8,10 @@ const ReviewCard = ({ item, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-50px" }}
-            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/30 rounded-3xl p-7 md:p-8 shadow-2xl transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
+            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/30 rounded-3xl p-7 md:p-8 shadow-2xl transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
         >
             <Quote
-                className="absolute top-6 right-6 w-10 h-10 text-yellow-500/10 group-hover:text-yellow-500/20 transition-colors duration-500"
+                className="absolute top-6 right-6 w-10 h-10 text-(--brand)/10 group-hover:text-(--brand)/20 transition-colors duration-500"
                 strokeWidth={1.5}
             />
 
@@ -21,7 +21,7 @@ const ReviewCard = ({ item, index }) => {
                         key={i}
                         className={`w-4 h-4 ${
                             i < item.rating
-                                ? "fill-yellow-500 text-yellow-500"
+                                ? "fill-(--brand) text-(--brand)"
                                 : "fill-zinc-700 text-zinc-700"
                         }`}
                     />
@@ -40,7 +40,7 @@ const ReviewCard = ({ item, index }) => {
                         className="w-11 h-11 rounded-full object-cover shrink-0 shadow-lg"
                     />
                 ) : (
-                    <div className="w-11 h-11 rounded-full bg-linear-to-br from-yellow-500 to-yellow-600 text-black font-bold flex items-center justify-center shrink-0 shadow-lg">
+                    <div className="w-11 h-11 rounded-full bg-linear-to-br from-(--brand) to-(--brand-hover) text-(--brand-foreground) font-bold flex items-center justify-center shrink-0 shadow-lg">
                         {item.initials}
                     </div>
                 )}

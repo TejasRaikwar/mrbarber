@@ -84,7 +84,7 @@ const LiveClock = () => {
     }, [])
     return (
         <div className="flex items-center gap-2.5 bg-zinc-900 border border-white/10 rounded-xl px-4 py-2.5">
-            <Clock className="w-4 h-4 text-yellow-500 shrink-0" />
+            <Clock className="w-4 h-4 text-(--brand) shrink-0" />
             <div className="text-right">
                 <p className="text-white font-semibold text-sm leading-tight tabular-nums">
                     {now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
@@ -172,7 +172,7 @@ const TimePicker = ({ value, onChange }) => {
             <div className="flex items-center bg-zinc-800 border border-white/10 rounded-lg p-0.5 ml-1">
                 {["AM", "PM"].map((opt) => (
                     <button key={opt} type="button" onClick={() => setAmPm(opt)}
-                        className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${ampm === opt ? "bg-yellow-500 text-black" : "text-gray-400 hover:text-white"}`}>
+                        className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${ampm === opt ? "bg-(--brand) text-(--brand-foreground)" : "text-gray-400 hover:text-white"}`}>
                         {opt}
                     </button>
                 ))}
@@ -302,8 +302,8 @@ const AppointmentDialog = ({ appointment = null, serviceOptions, onSaved, trigge
 const ApptCard = ({ appt, serviceOptions, onUpdated, onDelete }) => (
     <div className="bg-zinc-900/60 border border-white/10 rounded-2xl px-6 py-4 flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 min-w-0">
-            <div className="w-9 h-9 rounded-xl bg-yellow-500/10 flex items-center justify-center shrink-0">
-                <Scissors className="w-4 h-4 text-yellow-500" />
+            <div className="w-9 h-9 rounded-xl bg-(--brand)/10 flex items-center justify-center shrink-0">
+                <Scissors className="w-4 h-4 text-(--brand)" />
             </div>
             <div className="min-w-0">
                 <p className="text-white font-semibold leading-tight">{appt.clientName}</p>
@@ -319,7 +319,7 @@ const ApptCard = ({ appt, serviceOptions, onUpdated, onDelete }) => (
                     {fmtTime(appt.appointmentTime)}
                 </span>
             )}
-            <span className={`flex items-center gap-1 font-medium ${appt.amount != null ? "text-yellow-400" : "text-gray-600 italic"}`}>
+            <span className={`flex items-center gap-1 font-medium ${appt.amount != null ? "text-(--brand)" : "text-gray-600 italic"}`}>
                 {appt.amount != null
                     ? <><IndianRupee className="w-3.5 h-3.5" />{Number(appt.amount).toLocaleString("en-IN")}</>
                     : "—"}
@@ -402,7 +402,7 @@ const AppointmentPage = () => {
                             {FILTERS.map((f) => (
                                 <button key={f.key} onClick={() => setFilter(f.key)}
                                     className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                                        filter === f.key ? "bg-yellow-500 text-black" : "text-gray-400 hover:text-white"
+                                        filter === f.key ? "bg-(--brand) text-(--brand-foreground)" : "text-gray-400 hover:text-white"
                                     }`}>
                                     {f.label}
                                 </button>
@@ -426,8 +426,8 @@ const AppointmentPage = () => {
 
             {groups.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-yellow-500/10 flex items-center justify-center mb-5">
-                        <CalendarDays className="w-8 h-8 text-yellow-500" />
+                    <div className="w-16 h-16 rounded-2xl bg-(--brand)/10 flex items-center justify-center mb-5">
+                        <CalendarDays className="w-8 h-8 text-(--brand)" />
                     </div>
                     <h2 className="text-white font-semibold text-lg mb-2">No appointments</h2>
                     <p className="text-gray-500 text-sm max-w-xs">
@@ -439,7 +439,7 @@ const AppointmentPage = () => {
                     {groups.map((group) => (
                         <div key={group.date}>
                             <div className="flex items-center gap-3 mb-3">
-                                <CalendarDays className="w-4 h-4 text-yellow-500 shrink-0" />
+                                <CalendarDays className="w-4 h-4 text-(--brand) shrink-0" />
                                 <span className="text-sm font-semibold text-white">{group.label}</span>
                                 <span className="text-xs text-gray-600">
                                     {group.items.length} {group.items.length === 1 ? "appointment" : "appointments"}
@@ -461,12 +461,12 @@ const AppointmentPage = () => {
     )
 }
 
-const inputCls = "w-full bg-zinc-800 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white text-sm transition-colors"
+const inputCls = "w-full bg-zinc-800 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white text-sm transition-colors"
 
 const Field = ({ label, required, children }) => (
     <div>
         <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-1.5 font-medium">
-            {label}{required && <span className="text-yellow-500 ml-1">*</span>}
+            {label}{required && <span className="text-(--brand) ml-1">*</span>}
         </label>
         {children}
     </div>

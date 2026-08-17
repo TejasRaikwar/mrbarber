@@ -144,7 +144,7 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                     <h4 className="text-sm uppercase tracking-[2px] text-gray-500">Phone Contacts</h4>
                     <button
                         onClick={addContact}
-                        className="text-xs text-yellow-500 hover:text-yellow-400 inline-flex items-center gap-1"
+                        className="text-xs text-(--brand) hover:text-(--brand-hover) inline-flex items-center gap-1"
                     >
                         <Plus className="w-3 h-3" /> Add contact
                     </button>

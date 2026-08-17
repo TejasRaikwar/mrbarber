@@ -47,4 +47,8 @@ public class SiteSettings {
 
     /** Maximum number of reels allowed. */
     private Integer maxReels;
+
+    /** Site-wide accent color (hex), admin-selectable from a preset palette. */
+    @Builder.Default
+    private String themeColor = "#eab308";
 }

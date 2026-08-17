@@ -7,7 +7,7 @@ export const TextField = ({ label, value, onChange, type = "text", required, pla
             onChange={(e) => onChange(e.target.value)}
             required={required}
             placeholder={placeholder}
-            className="w-full bg-black/40 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white"
+            className="w-full bg-black/40 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white"
         />
     </div>
 )
@@ -22,7 +22,7 @@ export const NumberField = ({ label, value, onChange, min, max, step }) => (
             min={min}
             max={max}
             step={step}
-            className="w-full bg-black/40 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white"
+            className="w-full bg-black/40 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white"
         />
     </div>
 )
@@ -35,14 +35,14 @@ export const TextArea = ({ label, value, onChange, rows = 4, placeholder }) => (
             onChange={(e) => onChange(e.target.value)}
             rows={rows}
             placeholder={placeholder}
-            className="w-full bg-black/40 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white resize-y"
+            className="w-full bg-black/40 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white resize-y"
         />
     </div>
 )
 
 export const Button = ({ children, variant = "primary", type = "button", disabled, onClick }) => {
     const styles = {
-        primary: "bg-yellow-500 hover:bg-yellow-600 text-black",
+        primary: "bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground)",
         ghost: "border border-white/10 hover:border-white/30 text-white",
         danger: "border border-red-500/40 hover:bg-red-500/10 text-red-400"
     }

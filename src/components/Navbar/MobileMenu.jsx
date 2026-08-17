@@ -31,7 +31,7 @@ const MobileMenu = () => {
                                 key={link.id ?? link.label}
                                 href={`/${link.hash ? `#${link.hash}` : ""}`}
                                 onClick={(e) => onClick(e, link.hash)}
-                                className="text-white text-lg hover:text-yellow-500 cursor-pointer"
+                                className="text-white text-lg hover:text-(--brand) cursor-pointer"
                             >
                                 {link.label}
                             </a>

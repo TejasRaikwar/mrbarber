@@ -31,7 +31,7 @@ const AdminLogin = () => {
         <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
             <div className="w-full max-w-md bg-zinc-900/60 border border-white/10 rounded-3xl p-8 shadow-2xl backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-6">
-                    <Scissors className="text-yellow-500" />
+                    <Scissors className="text-(--brand)" />
                     <h1 className="text-2xl font-bold tracking-wide">Mr Barber · Portal</h1>
                 </div>
 
@@ -41,8 +41,8 @@ const AdminLogin = () => {
                 <form onSubmit={onSubmit} className="space-y-5">
                     <div>
                         <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-2">Username</label>
-                        <div className="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 focus-within:border-yellow-500/50">
-                            <User className="w-4 h-4 text-yellow-500" />
+                        <div className="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 focus-within:border-(--brand)/50">
+                            <User className="w-4 h-4 text-(--brand)" />
                             <input
                                 type="text"
                                 value={username}
@@ -56,8 +56,8 @@ const AdminLogin = () => {
 
                     <div>
                         <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-2">Password</label>
-                        <div className="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 focus-within:border-yellow-500/50">
-                            <Lock className="w-4 h-4 text-yellow-500" />
+                        <div className="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-3 py-2.5 focus-within:border-(--brand)/50">
+                            <Lock className="w-4 h-4 text-(--brand)" />
                             <input
                                 type="password"
                                 value={password}
@@ -76,7 +76,7 @@ const AdminLogin = () => {
                     <button
                         type="submit"
                         disabled={submitting}
-                        className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:opacity-60 text-black font-bold py-3 rounded-lg transition-all"
+                        className="w-full bg-(--brand) hover:bg-(--brand-hover) disabled:opacity-60 text-(--brand-foreground) font-bold py-3 rounded-lg transition-all"
                     >
                         {submitting ? "Signing in…" : "Sign in"}
                     </button>
@@ -84,7 +84,7 @@ const AdminLogin = () => {
 
                 <div className="mt-6 pt-5 border-t border-white/10 text-center">
                     <Link to="/"
-                        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-yellow-500 transition-colors">
+                        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-(--brand) transition-colors">
                         <ExternalLink className="w-3.5 h-3.5" />
                         View main website
                     </Link>

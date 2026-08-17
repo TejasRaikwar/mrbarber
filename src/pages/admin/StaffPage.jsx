@@ -113,7 +113,7 @@ const IdentityProofUpload = ({ value, onChange }) => {
                 {value ? (
                     isImage
                         ? <img src={value} alt="ID" className="w-full h-full object-cover" />
-                        : <FileText className="w-7 h-7 text-yellow-500" />
+                        : <FileText className="w-7 h-7 text-(--brand)" />
                 ) : (
                     <FileText className="w-6 h-6 text-gray-600" />
                 )}
@@ -128,7 +128,7 @@ const IdentityProofUpload = ({ value, onChange }) => {
                 {value && (
                     <>
                         <a href={value} target="_blank" rel="noreferrer"
-                            className="ml-3 text-xs text-yellow-500 hover:underline">View</a>
+                            className="ml-3 text-xs text-(--brand) hover:underline">View</a>
                         <button type="button" onClick={() => onChange("")}
                             className="ml-2 text-xs text-gray-500 hover:text-red-400 transition-colors">
                             Remove
@@ -327,8 +327,8 @@ const StaffCard = ({ s, onUpdated, onDelete }) => {
         <div className="bg-zinc-900/60 border border-white/10 rounded-2xl p-6">
             <div className="flex items-start justify-between gap-4 mb-5">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center shrink-0">
-                        <User className="w-6 h-6 text-yellow-500" />
+                    <div className="w-12 h-12 rounded-xl bg-(--brand)/10 flex items-center justify-center shrink-0">
+                        <User className="w-6 h-6 text-(--brand)" />
                     </div>
                     <div>
                         <p className="text-white font-semibold text-lg leading-tight">{s.displayName}</p>
@@ -372,7 +372,7 @@ const StaffCard = ({ s, onUpdated, onDelete }) => {
                 <Info icon={<FileText className="w-3.5 h-3.5" />} label="ID Proof"
                     value={s.identityProofUrl
                         ? <a href={s.identityProofUrl} target="_blank" rel="noreferrer"
-                            className="text-yellow-500 hover:underline">View document</a>
+                            className="text-(--brand) hover:underline">View document</a>
                         : null} />
             </div>
         </div>
@@ -384,7 +384,7 @@ const Info = ({ icon, label, value, accent, wide }) => (
         <p className="text-xs uppercase tracking-[1.5px] text-gray-500 mb-1 flex items-center gap-1.5">
             {icon}{label}
         </p>
-        <p className={`text-sm ${value ? (accent ? "text-yellow-400 font-medium" : "text-white") : "text-gray-600 italic"}`}>
+        <p className={`text-sm ${value ? (accent ? "text-(--brand) font-medium" : "text-white") : "text-gray-600 italic"}`}>
             {value || "—"}
         </p>
     </div>
@@ -434,8 +434,8 @@ const StaffPage = () => {
                 <p className="text-gray-500 text-sm">Loading…</p>
             ) : staff.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-yellow-500/10 flex items-center justify-center mb-5">
-                        <User className="w-8 h-8 text-yellow-500" />
+                    <div className="w-16 h-16 rounded-2xl bg-(--brand)/10 flex items-center justify-center mb-5">
+                        <User className="w-8 h-8 text-(--brand)" />
                     </div>
                     <h2 className="text-white font-semibold text-lg mb-2">No staff yet</h2>
                     <p className="text-gray-500 text-sm max-w-xs">
@@ -453,17 +453,17 @@ const StaffPage = () => {
     )
 }
 
-const inp = "w-full bg-zinc-800 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white text-sm"
+const inp = "w-full bg-zinc-800 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white text-sm"
 const Field = ({ label, required, children }) => (
     <div>
         <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-1.5 font-medium">
-            {label}{required && <span className="text-yellow-500 ml-1">*</span>}
+            {label}{required && <span className="text-(--brand) ml-1">*</span>}
         </label>
         {children}
     </div>
 )
 const SectionTitle = ({ children }) => (
-    <p className="text-xs uppercase tracking-[2px] text-yellow-500 font-semibold pt-1">{children}</p>
+    <p className="text-xs uppercase tracking-[2px] text-(--brand) font-semibold pt-1">{children}</p>
 )
 
 export default StaffPage

@@ -59,7 +59,7 @@ const Preloader = ({ onComplete }) => {
               }}
               className="relative flex items-center justify-center"
             >
-              <Scissors className="w-16 h-16 text-yellow-500" strokeWidth={1.5} />
+              <Scissors className="w-16 h-16 text-(--brand)" strokeWidth={1.5} />
               
               {/* Outer decorative glowing ring */}
               <motion.div
@@ -70,7 +70,7 @@ const Preloader = ({ onComplete }) => {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute inset-0 rounded-full border border-yellow-500/30 blur-sm w-16 h-16"
+                className="absolute inset-0 rounded-full border border-(--brand)/30 blur-sm w-16 h-16"
               />
             </motion.div>
 
@@ -97,7 +97,7 @@ const Preloader = ({ onComplete }) => {
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "80px", opacity: 0.4 }}
               transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-              className="h-px bg-yellow-500"
+              className="h-px bg-(--brand)"
             />
           </div>
         </motion.div>

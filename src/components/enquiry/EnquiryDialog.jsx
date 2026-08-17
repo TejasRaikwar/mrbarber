@@ -12,7 +12,7 @@ const Field = ({ label, type = "text", value, onChange, placeholder, required })
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             required={required}
-            className="w-full bg-white/5 border border-white/10 focus:border-yellow-500/60 rounded-lg px-3 py-2.5 outline-none text-white placeholder-gray-600 text-sm"
+            className="w-full bg-white/5 border border-white/10 focus:border-(--brand)/60 rounded-lg px-3 py-2.5 outline-none text-white placeholder-gray-600 text-sm"
         />
     </div>
 )
@@ -64,12 +64,12 @@ const EnquiryDialog = ({ trigger }) => {
 
                     {success ? (
                         <div className="flex flex-col items-center py-8 gap-4 text-center">
-                            <CheckCircle2 className="w-12 h-12 text-yellow-500" />
+                            <CheckCircle2 className="w-12 h-12 text-(--brand)" />
                             <p className="text-white font-semibold text-lg">Thank you!</p>
                             <p className="text-gray-400 text-sm">We've received your enquiry and will be in touch soon.</p>
                             <button
                                 onClick={() => handleOpen(false)}
-                                className="mt-2 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg text-sm transition-colors"
+                                className="mt-2 px-6 py-2 bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) font-semibold rounded-lg text-sm transition-colors"
                             >
                                 Close
                             </button>
@@ -86,7 +86,7 @@ const EnquiryDialog = ({ trigger }) => {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm transition-colors mt-2"
+                                className="w-full bg-(--brand) hover:bg-(--brand-hover) disabled:opacity-50 text-(--brand-foreground) font-semibold py-2.5 rounded-lg text-sm transition-colors mt-2"
                             >
                                 {submitting ? "Submitting…" : "Submit Enquiry"}
                             </button>

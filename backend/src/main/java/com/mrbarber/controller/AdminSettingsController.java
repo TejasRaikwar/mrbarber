@@ -33,6 +33,7 @@ public class AdminSettingsController {
         existing.setFooterPhone(body.getFooterPhone());
         existing.setFooterEmail(body.getFooterEmail());
         existing.setCopyrightText(body.getCopyrightText());
+        existing.setThemeColor(body.getThemeColor());
         return repo.save(existing);
     }
 }

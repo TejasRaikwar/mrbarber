@@ -89,7 +89,7 @@ const EnquiriesPage = () => {
                                 onClick={() => setFilter(f.key)}
                                 className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                                     filter === f.key
-                                        ? "bg-yellow-500 text-black"
+                                        ? "bg-(--brand) text-(--brand-foreground)"
                                         : "text-gray-400 hover:text-white"
                                 }`}
                             >
@@ -102,8 +102,8 @@ const EnquiriesPage = () => {
 
             {groups.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-yellow-500/10 flex items-center justify-center mb-5">
-                        <Mail className="w-8 h-8 text-yellow-500" />
+                    <div className="w-16 h-16 rounded-2xl bg-(--brand)/10 flex items-center justify-center mb-5">
+                        <Mail className="w-8 h-8 text-(--brand)" />
                     </div>
                     <h2 className="text-white font-semibold text-lg mb-2">No enquiries</h2>
                     <p className="text-gray-500 text-sm max-w-xs">
@@ -116,7 +116,7 @@ const EnquiriesPage = () => {
                         <div key={group.label}>
                             {/* Day header */}
                             <div className="flex items-center gap-3 mb-3">
-                                <CalendarDays className="w-4 h-4 text-yellow-500 shrink-0" />
+                                <CalendarDays className="w-4 h-4 text-(--brand) shrink-0" />
                                 <span className="text-sm font-semibold text-white">{group.label}</span>
                                 <span className="text-xs text-gray-600">
                                     {group.items.length} {group.items.length === 1 ? "enquiry" : "enquiries"}
@@ -131,8 +131,8 @@ const EnquiriesPage = () => {
                                         className="bg-zinc-900/60 border border-white/10 rounded-2xl px-6 py-4">
                                         <div className="flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-3 min-w-0">
-                                                <div className="w-9 h-9 rounded-xl bg-yellow-500/10 flex items-center justify-center shrink-0">
-                                                    <User className="w-4 h-4 text-yellow-500" />
+                                                <div className="w-9 h-9 rounded-xl bg-(--brand)/10 flex items-center justify-center shrink-0">
+                                                    <User className="w-4 h-4 text-(--brand)" />
                                                 </div>
                                                 <div className="min-w-0">
                                                     <p className="text-white font-semibold leading-tight">{e.name}</p>

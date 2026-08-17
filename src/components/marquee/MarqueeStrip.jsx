@@ -9,7 +9,7 @@ const MarqueeStrip = () => {
     const loop = [...marqueeItems, ...marqueeItems]
 
     return (
-        <div className="relative bg-yellow-500 text-black border-y border-yellow-600/40 overflow-hidden">
+        <div className="relative bg-(--brand) text-(--brand-foreground) border-y border-(--brand-hover)/40 overflow-hidden">
             <div className="marquee-strip">
                 <div className="marquee-strip__track">
                     {loop.map((item, i) => (

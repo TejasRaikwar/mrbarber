@@ -164,7 +164,7 @@ const ItemEditor = ({ schema, item, navLinks, onChange, onSave, onDelete }) => {
                                 <select
                                     value={item[f.key] ?? ""}
                                     onChange={(e) => onChange(f.key, e.target.value)}
-                                    className="w-full bg-zinc-900 border border-white/10 focus:border-yellow-500/50 rounded-lg px-3 py-2.5 outline-none text-white"
+                                    className="w-full bg-zinc-900 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white"
                                 >
                                     <option value="">— none —</option>
                                     {(navLinks || []).map((nl) => (

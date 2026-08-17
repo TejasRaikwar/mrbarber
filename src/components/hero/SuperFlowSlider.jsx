@@ -110,7 +110,7 @@ const SuperFlowSlider = () => {
           <button
             onClick={handlePrev}
             disabled={isTransitioning}
-            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-yellow-500 hover:border-yellow-500 hover:text-black text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-x-0.5 active:translate-x-0"
+            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-x-0.5 active:translate-x-0"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -118,7 +118,7 @@ const SuperFlowSlider = () => {
           <button
             onClick={handleNext}
             disabled={isTransitioning}
-            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-yellow-500 hover:border-yellow-500 hover:text-black text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:translate-x-0.5 active:translate-x-0"
+            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:translate-x-0.5 active:translate-x-0"
             aria-label="Next slide"
           >
             <ChevronRight className="w-5 h-5" />
@@ -136,7 +136,7 @@ const SuperFlowSlider = () => {
               disabled={isTransitioning}
               className={`cursor-pointer h-2 transition-all duration-300 rounded-full ${
                 activeIndex === index
-                  ? "w-8 bg-yellow-500 shadow-lg shadow-yellow-500/50"
+                  ? "w-8 bg-(--brand) shadow-lg shadow-(--brand)/50"
                   : "w-2 bg-white/30 hover:bg-white/60"
               }`}
               aria-label={`Go to slide ${index + 1}`}

@@ -1,8 +1,11 @@
 import { useEffect } from "react"
+import { getContrastForeground } from "./colorContrast"
+
+const DEFAULT_BRAND = "#eab308"
 
 /**
- * Keep <title> and the tab favicon in sync with admin-configured settings.
- * Falls back to the existing index.html values if a field is empty.
+ * Keep <title>, the tab favicon, and the brand accent color in sync with admin-configured settings.
+ * Falls back to the existing index.html/CSS values if a field is empty.
  */
 export const useDocumentMeta = (settings) => {
     useEffect(() => {
@@ -22,6 +25,10 @@ export const useDocumentMeta = (settings) => {
             }
             link.href = settings.faviconUrl
         }
+
+        const brand = settings.themeColor || DEFAULT_BRAND
+        document.documentElement.style.setProperty("--brand", brand)
+        document.documentElement.style.setProperty("--brand-foreground", getContrastForeground(brand))
     }, [settings])
 }
 

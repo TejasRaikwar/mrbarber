@@ -79,7 +79,7 @@ const AdminLayout = () => {
             {/* Sidebar */}
             <aside className="w-64 shrink-0 bg-zinc-950 border-r border-white/10 flex flex-col">
                 <div className="px-6 py-5 border-b border-white/10 flex items-center gap-2">
-                    <Scissors className="text-yellow-500" />
+                    <Scissors className="text-(--brand)" />
                     <span className="font-bold tracking-wide">Admin</span>
                 </div>
 
@@ -96,7 +96,7 @@ const AdminLayout = () => {
                             </button>
 
                             <div className="px-3 pt-1 pb-2">
-                                <p className="text-xs uppercase tracking-[2px] text-yellow-500 font-semibold">
+                                <p className="text-xs uppercase tracking-[2px] text-(--brand) font-semibold">
                                     {currentSection.label}
                                 </p>
                             </div>
@@ -108,7 +108,7 @@ const AdminLayout = () => {
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                                             isActive
-                                                ? "bg-yellow-500 text-black font-semibold"
+                                                ? "bg-(--brand) text-(--brand-foreground) font-semibold"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         }`
                                     }
@@ -130,7 +130,7 @@ const AdminLayout = () => {
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                                             isActive
-                                                ? "bg-yellow-500 text-black font-semibold"
+                                                ? "bg-(--brand) text-(--brand-foreground) font-semibold"
                                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                         }`
                                     }
@@ -150,8 +150,8 @@ const AdminLayout = () => {
                                     onClick={() => setActiveSection(id)}
                                     className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm hover:bg-white/5 transition-colors text-left group"
                                 >
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-yellow-500/10 flex items-center justify-center shrink-0 transition-colors">
-                                        <Icon className="w-4 h-4 text-gray-400 group-hover:text-yellow-500 transition-colors" />
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-(--brand)/10 flex items-center justify-center shrink-0 transition-colors">
+                                        <Icon className="w-4 h-4 text-gray-400 group-hover:text-(--brand) transition-colors" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="font-medium text-white text-sm">{label}</p>

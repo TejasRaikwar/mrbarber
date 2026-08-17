@@ -75,7 +75,7 @@ const ChangePasswordPage = () => {
                 />
 
                 {error && <p className="text-red-400 text-sm">{error}</p>}
-                {info && <p className="text-yellow-500 text-sm">{info}</p>}
+                {info && <p className="text-(--brand) text-sm">{info}</p>}
 
                 <Button type="submit" disabled={submitting}>
                     {submitting ? "Changing…" : "Change password"}

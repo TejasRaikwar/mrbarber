@@ -11,7 +11,7 @@ const LocationCard = ({ item, index }) => {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-80px" }}
-            className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
+            className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
         >
             {/* Image */}
             <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden">
@@ -25,7 +25,7 @@ const LocationCard = ({ item, index }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
 
                 {/* City badge */}
-                <div className="absolute top-5 left-5 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[3px] text-yellow-500">
+                <div className="absolute top-5 left-5 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[3px] text-(--brand)">
                     Visit Us
                 </div>
             </div>
@@ -39,7 +39,7 @@ const LocationCard = ({ item, index }) => {
                 {/* Address */}
                 <div className="flex items-start gap-3 mb-7">
                     <MapPin
-                        className="w-5 h-5 text-yellow-500 shrink-0 mt-1"
+                        className="w-5 h-5 text-(--brand) shrink-0 mt-1"
                         strokeWidth={1.75}
                     />
                     <div className="text-gray-300 font-light leading-relaxed">
@@ -54,7 +54,7 @@ const LocationCard = ({ item, index }) => {
                     {item.contacts.map((contact, i) => (
                         <div key={i} className="flex items-center gap-3">
                             <Phone
-                                className="w-4 h-4 text-yellow-500 shrink-0"
+                                className="w-4 h-4 text-(--brand) shrink-0"
                                 strokeWidth={2}
                             />
                             <div className="flex flex-wrap items-baseline gap-x-2">
@@ -63,7 +63,7 @@ const LocationCard = ({ item, index }) => {
                                 </span>
                                 <a
                                     href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                                    className="text-white font-medium hover:text-yellow-500 transition-colors"
+                                    className="text-white font-medium hover:text-(--brand) transition-colors"
                                 >
                                     {contact.phone}
                                 </a>
@@ -76,7 +76,7 @@ const LocationCard = ({ item, index }) => {
                 <div className="flex flex-wrap gap-4">
                     <a
                         href={`tel:${primaryPhone}`}
-                        className="inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black px-7 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/20 hover:-translate-y-0.5 active:translate-y-0"
+                        className="inline-flex items-center gap-2 bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) px-7 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg shadow-(--brand)/10 hover:shadow-(--brand)/20 hover:-translate-y-0.5 active:translate-y-0"
                     >
                         <Phone className="w-4 h-4" strokeWidth={2.5} />
                         Contact
@@ -85,7 +85,7 @@ const LocationCard = ({ item, index }) => {
                         href={`https://wa.me/${item.whatsapp}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-white/20 hover:border-yellow-500 hover:text-yellow-500 text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
+                        className="inline-flex items-center gap-2 border border-white/20 hover:border-(--brand) hover:text-(--brand) text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
                     >
                         <MessageCircle className="w-4 h-4" strokeWidth={2.5} />
                         WhatsApp

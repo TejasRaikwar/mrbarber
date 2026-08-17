@@ -15,7 +15,7 @@ const StaffLayout = () => {
         <div className="min-h-screen bg-black text-white flex">
             <aside className="w-60 shrink-0 bg-zinc-950 border-r border-white/10 flex flex-col">
                 <div className="px-6 py-5 border-b border-white/10 flex items-center gap-2">
-                    <Scissors className="text-yellow-500" />
+                    <Scissors className="text-(--brand)" />
                     <span className="font-bold tracking-wide">Staff Portal</span>
                 </div>
 
@@ -25,7 +25,7 @@ const StaffLayout = () => {
                             className={({ isActive }) =>
                                 `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                                     isActive
-                                        ? "bg-yellow-500 text-black font-semibold"
+                                        ? "bg-(--brand) text-(--brand-foreground) font-semibold"
                                         : "text-gray-400 hover:text-white hover:bg-white/5"
                                 }`
                             }>

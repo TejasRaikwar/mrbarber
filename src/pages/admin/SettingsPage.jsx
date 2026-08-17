@@ -3,6 +3,7 @@ import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
 import { TextField, TextArea, Button, PageHeader } from "./components/FormFields"
 import ImageUpload from "./components/ImageUpload"
+import ColorSwatchField from "./components/ColorSwatchField"
 
 const SettingsPage = () => {
     const { refresh } = useSiteContent()
@@ -52,6 +53,8 @@ const SettingsPage = () => {
                     <TextField label="Tagline" value={form.siteTagline} onChange={update("siteTagline")} />
                 </div>
 
+                <ColorSwatchField label="Theme Color" value={form.themeColor} onChange={update("themeColor")} />
+
                 <TextField label="Browser Tab Title" value={form.pageTitle} onChange={update("pageTitle")} />
 
                 <TextArea label="Footer Description" value={form.footerDescription} onChange={update("footerDescription")} rows={3} />
@@ -68,7 +71,7 @@ const SettingsPage = () => {
                     <TextField label="Max Reels Allowed" value={form.maxReels} onChange={(v) => update("maxReels")(v === "" ? "" : Number(v))} type="number" />
                 </div>
 
-                {message && <p className="text-yellow-500 text-sm">{message}</p>}
+                {message && <p className="text-(--brand) text-sm">{message}</p>}
             </div>
         </>
     )

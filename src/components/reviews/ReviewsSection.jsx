@@ -34,7 +34,7 @@ const ReviewsSection = () => {
                         <p className="text-gray-400 max-w-2xl mx-auto">
                             Real stories from men who&apos;ve transformed their look —
                             averaging{" "}
-                            <span className="text-yellow-500 font-semibold">
+                            <span className="text-(--brand) font-semibold">
                                 {averageRating} / 5
                             </span>{" "}
                             across hundreds of reviews.

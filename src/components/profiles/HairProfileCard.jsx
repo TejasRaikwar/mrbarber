@@ -11,7 +11,7 @@ const HairProfileCard = ({ item, index }) => {
             className="group cursor-pointer"
         >
             {/* Visual Frame */}
-            <div className="relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/30 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/30 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl">
                 {/* Before Image (Primary, top layer with diagonal cut) */}
                 <div
                     className="relative h-[420px] md:h-[480px] w-full"
@@ -41,7 +41,7 @@ const HairProfileCard = ({ item, index }) => {
                 </div>
 
                 {/* After Image (smaller, bottom-right inset) */}
-                <div className="absolute bottom-5 right-5 w-[45%] h-[42%] rounded-2xl overflow-hidden border-2 border-yellow-500/40 shadow-2xl z-20 transition-all duration-500 group-hover:scale-105 group-hover:border-yellow-500">
+                <div className="absolute bottom-5 right-5 w-[45%] h-[42%] rounded-2xl overflow-hidden border-2 border-(--brand)/40 shadow-2xl z-20 transition-all duration-500 group-hover:scale-105 group-hover:border-(--brand)">
                     {item.after ? (
                         <img
                             src={item.after}
@@ -53,7 +53,7 @@ const HairProfileCard = ({ item, index }) => {
                         <div className="h-full w-full bg-zinc-800 flex items-center justify-center text-gray-600 text-xs">No image</div>
                     )}
                     {/* After label */}
-                    <div className="absolute left-2 top-2 bg-yellow-500 text-black px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                    <div className="absolute left-2 top-2 bg-(--brand) text-(--brand-foreground) px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                         After
                     </div>
                 </div>
@@ -63,14 +63,14 @@ const HairProfileCard = ({ item, index }) => {
                     className="absolute inset-0 pointer-events-none z-[15]"
                     style={{
                         background:
-                            "linear-gradient(135deg, transparent 0%, transparent 59.6%, rgba(234,179,8,0.6) 59.6%, rgba(234,179,8,0.6) 60.4%, transparent 60.4%)"
+                            "linear-gradient(135deg, transparent 0%, transparent 59.6%, color-mix(in srgb, var(--brand) 60%, transparent) 59.6%, color-mix(in srgb, var(--brand) 60%, transparent) 60.4%, transparent 60.4%)"
                     }}
                 />
             </div>
 
             {/* Caption */}
             <div className="mt-5 px-2 text-center">
-                <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide group-hover:text-yellow-500 transition-colors duration-300">
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide group-hover:text-(--brand) transition-colors duration-300">
                     {item.title}
                 </h3>
                 <p className="text-gray-400 text-sm mt-2 font-light">

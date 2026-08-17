@@ -72,7 +72,7 @@ const AdminReels = () => {
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full bg-black border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-yellow-500"
+                            className="w-full bg-black border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-(--brand)"
                             placeholder="e.g., Fresh Fade Friday"
                             required
                         />
@@ -84,7 +84,7 @@ const AdminReels = () => {
                             accept="video/*"
                             onChange={(e) => setFile(e.target.files[0])}
                             ref={fileInputRef}
-                            className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-yellow-500 file:text-black hover:file:bg-yellow-400 cursor-pointer"
+                            className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-(--brand) file:text-(--brand-foreground) hover:file:bg-(--brand-hover) cursor-pointer"
                             required
                         />
                     </div>

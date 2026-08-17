@@ -38,7 +38,7 @@ const Navbar = () => {
                             className="h-8 w-auto object-contain"
                         />
                     ) : (
-                        <Scissors className="text-yellow-500" />
+                        <Scissors className="text-(--brand)" />
                     )}
                     <h1 className="text-2xl font-bold text-white tracking-wide">
                         {siteName}
@@ -49,7 +49,7 @@ const Navbar = () => {
 
                 <EnquiryDialog
                     trigger={
-                        <button className="hidden cursor-pointer md:block bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2 rounded-lg font-medium transition-all duration-300">
+                        <button className="hidden cursor-pointer md:block bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) px-5 py-2 rounded-lg font-medium transition-all duration-300">
                             Enquire Now
                         </button>
                     }

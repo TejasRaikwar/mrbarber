@@ -17,7 +17,7 @@ const ServiceCard = ({ item, index }) => {
     const glowBackground = useTransform(
         [glowX, glowY],
         ([x, y]) =>
-            `radial-gradient(280px circle at ${x} ${y}, rgba(234,179,8,0.15), transparent 70%)`
+            `radial-gradient(280px circle at ${x} ${y}, color-mix(in srgb, var(--brand) 15%, transparent), transparent 70%)`
     )
 
     const handleMouseMove = (e) => {
@@ -47,7 +47,7 @@ const ServiceCard = ({ item, index }) => {
                 transformPerspective: 1000,
                 transformStyle: "preserve-3d"
             }}
-            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-yellow-500/30 rounded-3xl p-7 shadow-2xl transition-colors duration-500 overflow-hidden h-full flex flex-col cursor-pointer"
+            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/30 rounded-3xl p-7 shadow-2xl transition-colors duration-500 overflow-hidden h-full flex flex-col cursor-pointer"
         >
             {/* Mouse-following radial glow */}
             <motion.div
@@ -57,18 +57,18 @@ const ServiceCard = ({ item, index }) => {
 
             {/* Icon */}
             <div
-                className="relative w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mb-6 group-hover:bg-yellow-500 group-hover:border-yellow-500 transition-all duration-500"
+                className="relative w-14 h-14 rounded-2xl bg-(--brand)/10 border border-(--brand)/20 flex items-center justify-center mb-6 group-hover:bg-(--brand) group-hover:border-(--brand) transition-all duration-500"
                 style={{ transform: "translateZ(30px)" }}
             >
                 <Icon
-                    className="w-6 h-6 text-yellow-500 group-hover:text-black transition-colors duration-500"
+                    className="w-6 h-6 text-(--brand) group-hover:text-(--brand-foreground) transition-colors duration-500"
                     strokeWidth={1.75}
                 />
             </div>
 
             {/* Title */}
             <h3
-                className="text-xl font-bold text-white tracking-wide mb-3 group-hover:text-yellow-500 transition-colors duration-300"
+                className="text-xl font-bold text-white tracking-wide mb-3 group-hover:text-(--brand) transition-colors duration-300"
                 style={{ transform: "translateZ(20px)" }}
             >
                 {item.title}

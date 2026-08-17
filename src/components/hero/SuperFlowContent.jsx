@@ -22,9 +22,9 @@ const SuperFlowContent = ({ slide }) => {
     >
       <motion.p
         variants={contentVariants.subtitle}
-        className="text-yellow-500 uppercase tracking-[6px] mb-4 font-semibold text-sm md:text-base flex items-center gap-2"
+        className="text-(--brand) uppercase tracking-[6px] mb-4 font-semibold text-sm md:text-base flex items-center gap-2"
       >
-        <Scissors className="h-4 w-4 text-yellow-500 inline md:hidden" />
+        <Scissors className="h-4 w-4 text-(--brand) inline md:hidden" />
         {slide.subtitle}
       </motion.p>
 
@@ -46,7 +46,7 @@ const SuperFlowContent = ({ slide }) => {
         <motion.div variants={contentVariants.buttons} className="flex flex-wrap gap-4">
           <button
             onClick={handleSecondaryClick}
-            className="cursor-pointer border border-white/20 hover:border-yellow-500 hover:text-yellow-500 text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
+            className="cursor-pointer border border-white/20 hover:border-(--brand) hover:text-(--brand) text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
           >
             {slide.secondaryCtaLabel}
           </button>

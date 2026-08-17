@@ -9,7 +9,7 @@ const SectionHeading = ({ eyebrow, title, description, className = "" }) => {
             viewport={{ once: true, margin: "-80px" }}
             className={`text-center mb-10 ${className}`}
         >
-            <p className="text-yellow-500 uppercase tracking-[5px] mb-3 text-sm">
+            <p className="text-(--brand) uppercase tracking-[5px] mb-3 text-sm">
                 {eyebrow}
             </p>
 

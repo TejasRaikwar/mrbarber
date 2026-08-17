@@ -51,7 +51,7 @@ const AmbientBackground = () => {
                 className="absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 20% 0%, rgba(234,179,8,0.08), transparent 50%)"
+                        "radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--brand) 8%, transparent), transparent 50%)"
                 }}
             />
 
@@ -60,7 +60,7 @@ const AmbientBackground = () => {
                 className="absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse at 80% 100%, rgba(234,179,8,0.06), transparent 55%)"
+                        "radial-gradient(ellipse at 80% 100%, color-mix(in srgb, var(--brand) 6%, transparent), transparent 55%)"
                 }}
             />
 
