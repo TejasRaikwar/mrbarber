@@ -44,4 +44,7 @@ public class SiteSettings {
 
     /** Bottom-bar copyright text. */
     private String copyrightText;
+
+    /** Maximum number of reels allowed. */
+    private Integer maxReels;
 }

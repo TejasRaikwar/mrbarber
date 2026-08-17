@@ -103,6 +103,18 @@ export const api = {
             body: form,
             isFormData: true
         })
+    },
+
+    // Reels upload
+    uploadReel: (file, title) => {
+        const form = new FormData()
+        form.append("file", file)
+        form.append("title", title)
+        return request("/api/admin/reels", {
+            method: "POST",
+            body: form,
+            isFormData: true
+        })
     }
 }
 

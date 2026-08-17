@@ -17,7 +17,8 @@ import {
     ExternalLink,
     KeyRound,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    Film
 } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 
@@ -41,6 +42,7 @@ const SECTIONS = [
             { to: "/admin/settings", label: "Site Settings", icon: Settings },
             { to: "/admin/change-password", label: "Change Password", icon: KeyRound },
             { to: "/admin/hero-slides", label: "Hero Slides", icon: LayoutGrid },
+            { to: "/admin/reels", label: "Reels", icon: Film },
             { to: "/admin/marquee", label: "Marquee", icon: Type },
             { to: "/admin/services", label: "Services", icon: Scissors },
             { to: "/admin/transformations", label: "Transformations", icon: ImageIcon },

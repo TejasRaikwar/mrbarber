@@ -29,6 +29,7 @@ public class PublicSiteController {
     private final MarqueeItemRepository marqueeRepo;
     private final SocialLinkRepository socialRepo;
     private final NavLinkRepository navRepo;
+    private final ReelRepository reelRepo;
 
     @GetMapping("/site")
     public Map<String, Object> site() {
@@ -43,6 +44,7 @@ public class PublicSiteController {
         body.put("reviews", reviewRepo.findAllByOrderByDisplayOrderAsc());
         body.put("locations", locationRepo.findAllByOrderByDisplayOrderAsc());
         body.put("socialLinks", socialRepo.findAllByOrderByDisplayOrderAsc());
+        body.put("reels", reelRepo.findAllByOrderByOrderIndexAsc());
         return body;
     }
 
@@ -76,4 +78,7 @@ public class PublicSiteController {
 
     @GetMapping("/social-links")
     public List<SocialLink> socials() { return socialRepo.findAllByOrderByDisplayOrderAsc(); }
+
+    @GetMapping("/reels")
+    public List<Reel> reels() { return reelRepo.findAllByOrderByOrderIndexAsc(); }
 }

@@ -11,6 +11,7 @@ import DashboardPage from "@/pages/admin/DashboardPage"
 import RegisterPage from "@/pages/admin/RegisterPage"
 import AppointmentPage from "@/pages/admin/AppointmentPage"
 import EnquiriesPage from "@/pages/admin/EnquiriesPage"
+import AdminReels from "@/pages/admin/AdminReels"
 
 import StaffPage from "@/pages/admin/StaffPage"
 import StaffLayout from "@/pages/staff/StaffLayout"
@@ -57,6 +58,7 @@ const AppRoutes = () => {
             <Route path="hero-slides" element={<CrudPage schema={heroSlidesSchema} />} />
             <Route path="marquee" element={<CrudPage schema={marqueeSchema} />} />
             <Route path="services" element={<CrudPage schema={servicesSchema} />} />
+            <Route path="reels" element={<AdminReels />} />
             <Route path="transformations" element={<CrudPage schema={transformationsSchema} />} />
             <Route path="hair-profiles" element={<CrudPage schema={hairProfilesSchema} />} />
             <Route path="reviews" element={<CrudPage schema={reviewsSchema} />} />

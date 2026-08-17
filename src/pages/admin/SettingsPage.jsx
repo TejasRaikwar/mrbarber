@@ -63,7 +63,10 @@ const SettingsPage = () => {
                     <TextField label="Footer Email" value={form.footerEmail} onChange={update("footerEmail")} type="email" />
                 </div>
 
-                <TextField label="Copyright Text" value={form.copyrightText} onChange={update("copyrightText")} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <TextField label="Copyright Text" value={form.copyrightText} onChange={update("copyrightText")} />
+                    <TextField label="Max Reels Allowed" value={form.maxReels} onChange={(v) => update("maxReels")(v === "" ? "" : Number(v))} type="number" />
+                </div>
 
                 {message && <p className="text-yellow-500 text-sm">{message}</p>}
             </div>

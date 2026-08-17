@@ -13,7 +13,8 @@ const EMPTY = {
     hairProfiles: [],
     reviews: [],
     locations: [],
-    socialLinks: []
+    socialLinks: [],
+    reels: []
 }
 
 export const SiteContentProvider = ({ children }) => {

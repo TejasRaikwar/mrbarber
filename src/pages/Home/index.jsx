@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 
 import SuperFlowSlider from "@/components/hero/SuperFlowSlider"
 import MarqueeStrip from "@/components/marquee/MarqueeStrip"
+import ReelsSection from "@/components/reels/ReelsSection"
 import ServicesSection from "@/components/services/ServicesSection"
 import BeforeAfterSection from "@/components/transformations/BeforeAfterSection"
 import HairProfilesSection from "@/components/profiles/HairProfilesSection"
@@ -43,6 +44,7 @@ const Home = () => {
       <Preloader onComplete={() => setLoading(false)} />
       <SuperFlowSlider />
       <MarqueeStrip />
+      <ReelsSection />
       <ServicesSection />
       <BeforeAfterSection />
       <HairProfilesSection />
