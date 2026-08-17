@@ -31,7 +31,7 @@ app:
     url: ${CLOUDINARY_URL:cloudinary://725234339843327:L-FSuwgmlaPG9p3CpxBGI1vCvw4@dfycl4q5v}
   uploads:
     dir: ${UPLOADS_DIR:./uploads}
-    public-base-url: ${UPLOADS_BASE_URL:http://localhost:8080/uploads}
+    public-base-url: ${UPLOADS_BASE_URL:http://localhost:8081/uploads}
   cors:
     allowed-origins:
       - http://localhost:5173
