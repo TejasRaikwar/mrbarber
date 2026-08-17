@@ -6,24 +6,40 @@ Spring Boot 3.3 CMS backend powering the Mr Barber site.
 
 - Java 17+
 - Maven 3.9+
-- MySQL 8 running locally on `:3306`
+- A MySQL-compatible database: local MySQL 8 on `:3306`, or a [TiDB Cloud Serverless](https://tidbcloud.com/) cluster (MySQL wire-protocol compatible)
 
 ## Setup
 
-1. Create a MySQL user/grant (or use root). The schema `mrbarber` is auto-created via the JDBC URL.
-2. Set environment variables (or use the defaults in `application.yml`):
+1. Create the target database/schema (auto-created via `createDatabaseIfNotExist` for local MySQL; for TiDB Serverless, create the database in the console or let the app connect to the default one).
+2. Set environment variables (or use the local-MySQL defaults in `application.yml`):
    ```
+   # Local MySQL
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_NAME=mrbarber
    DB_USER=root
    DB_PASSWORD=root
+
+   # TiDB Cloud Serverless instead — get these from the cluster's "Connect" dialog
+   DB_HOST=gateway01.<region>.prod.aws.tidbcloud.com
+   DB_PORT=4000
+   DB_NAME=mrbarber
+   DB_USER=<prefix>.root
+   DB_PASSWORD=<cluster password>
+   DB_USE_SSL=true
+   DB_SSL_MODE=VERIFY_IDENTITY
+
    JWT_SECRET=<base64-encoded 64-byte secret — generate with: openssl rand -base64 64>
    ADMIN_USERNAME=admin
    ADMIN_PASSWORD=admin123
+   CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+   CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:4173   # comma-separated; set to your deployed frontend origin(s) in production
    ```
 3. Run:
    ```
    mvn spring-boot:run
    ```
-4. The server starts on `http://localhost:8080`.
+4. The server starts on `http://localhost:8081`.
 5. On first boot, an admin user (`admin` / `admin123` by default) and starter site content are seeded automatically.
 
 ## API surface
@@ -60,12 +76,9 @@ For each content type below: `GET`, `POST` (create), `PUT /{id}` (update), `DELE
 - `/api/admin/social-links`
 - `POST /api/admin/files` (`multipart/form-data`, field `file`) → `{ url }` for uploaded image
 
-### Static assets
-- `/uploads/**` — public read of stored images.
-
 ## File uploads
 
-Files go to `./uploads/` (override with `UPLOADS_DIR`). The URL returned by `/api/admin/files` is what the frontend stores in image fields (e.g. `logoUrl`, `faviconUrl`, `beforeImageUrl`).
+Images (logo, favicon, hero slides, transformations, hair profiles, etc.) uploaded via `POST /api/admin/files` and reel videos uploaded via `POST /api/admin/reels` both go to Cloudinary (configured by `CLOUDINARY_URL`). The URL returned is what the frontend stores in image/video fields (e.g. `logoUrl`, `faviconUrl`, `beforeImageUrl`, `videoUrl`).
 
 ## First-run checklist
 

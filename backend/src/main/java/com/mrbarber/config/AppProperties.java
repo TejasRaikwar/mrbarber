@@ -9,7 +9,6 @@ import java.util.List;
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private Jwt jwt = new Jwt();
-    private Uploads uploads = new Uploads();
     private Cors cors = new Cors();
     private Seed seed = new Seed();
 
@@ -17,12 +16,6 @@ public class AppProperties {
     public static class Jwt {
         private String secret;
         private long expirationMs;
-    }
-
-    @Data
-    public static class Uploads {
-        private String dir;
-        private String publicBaseUrl;
     }
 
     @Data

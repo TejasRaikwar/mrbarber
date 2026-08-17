@@ -1,10 +1,11 @@
 package com.mrbarber.controller;
 
-import com.mrbarber.service.FileStorageService;
+import com.mrbarber.service.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -12,11 +13,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminFileController {
 
-    private final FileStorageService storage;
+    private final CloudinaryService cloudinaryService;
 
     @PostMapping(consumes = "multipart/form-data")
-    public Map<String, String> upload(@RequestParam("file") MultipartFile file) {
-        String url = storage.store(file);
-        return Map.of("url", url);
+    public Map<String, String> upload(@RequestParam("file") MultipartFile file) throws IOException {
+        Map uploadResult = cloudinaryService.uploadImage(file);
+        return Map.of("url", uploadResult.get("secure_url").toString());
     }
 }

@@ -12,9 +12,9 @@ backend/             -- Spring Boot 3.3 + MySQL backend
 ## Stack
 
 - **Frontend**: React 19, Vite, Tailwind v4, framer-motion, react-router-dom 7
-- **Backend**: Spring Boot 3.3, Spring Security (JWT), Spring Data JPA, MySQL 8
+- **Backend**: Spring Boot 3.3, Spring Security (JWT), Spring Data JPA, MySQL-compatible (local MySQL 8 or TiDB Cloud Serverless)
 - **Auth**: JWT (HS256), single ADMIN role, BCrypt password hashing
-- **File storage**: Local disk, served via `/uploads/**`
+- **File storage**: Cloudinary (images and reel videos)
 
 ## Quick start
 
@@ -23,9 +23,9 @@ backend/             -- Spring Boot 3.3 + MySQL backend
 ```bash
 cd backend
 
-# Ensure MySQL is running on :3306 (the schema `mrbarber` is auto-created).
-# Optionally set env vars (defaults in application.yml are fine for dev):
-#   DB_USER, DB_PASSWORD, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD
+# Local MySQL running on :3306 (schema `mrbarber` auto-created) — defaults in application.yml are fine for dev.
+# Or point DB_HOST/DB_PORT/DB_USER/DB_PASSWORD at a TiDB Cloud Serverless cluster — see backend/README.md.
+# Also set: JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD, CLOUDINARY_URL
 
 mvn spring-boot:run
 ```
@@ -34,7 +34,7 @@ The first boot seeds:
 - An admin user (`admin` / `admin123` by default)
 - All starter site content matching the original hardcoded frontend
 
-API listens on `http://localhost:8080`.
+API listens on `http://localhost:8081`.
 
 ### 2. Frontend
 
@@ -79,7 +79,7 @@ Full endpoint reference in [`backend/README.md`](backend/README.md). Headline en
 ## Security notes
 
 - All `/api/admin/**` routes require `Authorization: Bearer <jwt>` with role `ADMIN`
-- `/api/public/**` and `/uploads/**` are open (read-only)
+- `/api/public/**` is open (read-only)
 - JWT secret is base64-encoded in `JWT_SECRET` — **generate a fresh one before deploying**:
   ```bash
   openssl rand -base64 64
@@ -94,6 +94,6 @@ Lucide icon names referenced by string in the DB (`services.iconName`) are resol
 
 For production:
 1. Set strong `JWT_SECRET`, `DB_PASSWORD`, `ADMIN_PASSWORD` env vars
-2. `cd backend && mvn package` → run the resulting jar (`java -jar target/mrbarber-backend-0.0.1-SNAPSHOT.jar`)
-3. `npm run build` for frontend → serve `dist/` via Nginx or copy into `backend/src/main/resources/static`
-4. Set `app.uploads.public-base-url` to your final domain so uploaded image URLs are correct
+2. Set `CORS_ALLOWED_ORIGINS` to your deployed frontend's origin(s) (comma-separated) — it defaults to the local dev Vite ports only, so the API will reject cross-origin requests from any other domain until this is set
+3. `cd backend && mvn package` → run the resulting jar (`java -jar target/mrbarber-backend-0.0.1-SNAPSHOT.jar`)
+4. `npm run build` for frontend → serve `dist/` via Nginx or copy into `backend/src/main/resources/static`, with `VITE_API_BASE_URL` pointed at the deployed backend

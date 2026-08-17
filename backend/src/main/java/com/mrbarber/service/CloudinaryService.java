@@ -31,4 +31,12 @@ public class CloudinaryService {
                 "resource_type", "video"
         ));
     }
+
+    public Map uploadImage(MultipartFile file) throws IOException {
+        log.info("Uploading image to Cloudinary...");
+        return cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
+                "resource_type", "image",
+                "folder", "mrbarber/images"
+        ));
+    }
 }

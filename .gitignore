@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+api keys.txt
+api_test.json
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
