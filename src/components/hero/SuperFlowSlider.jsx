@@ -41,8 +41,8 @@ const SuperFlowSlider = () => {
 
   if (slides.length === 0) {
     return (
-      <section className="relative h-screen w-full bg-black flex items-center justify-center">
-        <p className="text-gray-500 text-sm">No hero slides configured.</p>
+      <section className="relative h-screen w-full bg-(--media-bg) flex items-center justify-center">
+        <p className="text-(--media-foreground)/60 text-sm">No hero slides configured.</p>
       </section>
     )
   }
@@ -68,7 +68,7 @@ const SuperFlowSlider = () => {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black select-none">
+    <section className="relative h-screen w-full overflow-hidden bg-(--media-bg) select-none">
       {/* Background Slices Layer */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <AnimatePresence
@@ -93,7 +93,7 @@ const SuperFlowSlider = () => {
       </div>
 
       {/* Vignette */}
-      <div className="absolute bottom-0 left-0 w-full h-44 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-44 bg-gradient-to-t from-(--media-bg) to-transparent z-10 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-20 flex h-full items-center">
@@ -110,7 +110,7 @@ const SuperFlowSlider = () => {
           <button
             onClick={handlePrev}
             disabled={isTransitioning}
-            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-x-0.5 active:translate-x-0"
+            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-white/10 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-x-0.5 active:translate-x-0"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -118,7 +118,7 @@ const SuperFlowSlider = () => {
           <button
             onClick={handleNext}
             disabled={isTransitioning}
-            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:translate-x-0.5 active:translate-x-0"
+            className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-white/10 hover:bg-(--brand) hover:border-(--brand) hover:text-(--brand-foreground) text-white transition-all duration-300 backdrop-blur-md disabled:opacity-50 disabled:cursor-not-allowed hover:translate-x-0.5 active:translate-x-0"
             aria-label="Next slide"
           >
             <ChevronRight className="w-5 h-5" />

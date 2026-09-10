@@ -12,9 +12,9 @@ const StaffLayout = () => {
     const { user, logout } = useAuth()
 
     return (
-        <div className="min-h-screen bg-black text-white flex">
-            <aside className="w-60 shrink-0 bg-zinc-950 border-r border-white/10 flex flex-col">
-                <div className="px-6 py-5 border-b border-white/10 flex items-center gap-2">
+        <div className="min-h-screen bg-background text-foreground flex">
+            <aside className="w-60 shrink-0 bg-muted border-r border-border flex flex-col">
+                <div className="px-6 py-5 border-b border-border flex items-center gap-2">
                     <Scissors className="text-(--brand)" />
                     <span className="font-bold tracking-wide">Staff Portal</span>
                 </div>
@@ -26,7 +26,7 @@ const StaffLayout = () => {
                                 `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                                     isActive
                                         ? "bg-(--brand) text-(--brand-foreground) font-semibold"
-                                        : "text-gray-400 hover:text-white hover:bg-white/5"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-accent/70"
                                 }`
                             }>
                             <Icon className="w-4 h-4" />
@@ -35,16 +35,16 @@ const StaffLayout = () => {
                     ))}
                 </nav>
 
-                <div className="p-3 border-t border-white/10">
-                    <div className="px-3 py-2 text-xs text-gray-500">
-                        Signed in as <span className="text-white">{user?.username}</span>
+                <div className="p-3 border-t border-border">
+                    <div className="px-3 py-2 text-xs text-muted-foreground">
+                        Signed in as <span className="text-foreground">{user?.username}</span>
                     </div>
                     <NavLink to="/"
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/70 transition-colors">
                         <ExternalLink className="w-4 h-4" /> View Website
                     </NavLink>
                     <button onClick={logout}
-                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                        className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/70 transition-colors">
                         <LogOut className="w-4 h-4" /> Sign out
                     </button>
                 </div>

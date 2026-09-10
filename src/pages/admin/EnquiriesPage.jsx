@@ -96,7 +96,7 @@ const EnquiriesPage = () => {
                 title="Enquiries"
                 description="Customer enquiries submitted via the website."
                 actions={
-                    <div className="flex items-center bg-zinc-900 border border-white/10 rounded-xl p-1 gap-0.5">
+                    <div className="flex items-center bg-card border border-border rounded-xl p-1 gap-0.5">
                         {FILTERS.map((f) => (
                             <button
                                 key={f.key}
@@ -104,7 +104,7 @@ const EnquiriesPage = () => {
                                 className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                                     filter === f.key
                                         ? "bg-(--brand) text-(--brand-foreground)"
-                                        : "text-gray-400 hover:text-white"
+                                        : "text-muted-foreground hover:text-foreground"
                                 }`}
                             >
                                 {f.label}
@@ -119,8 +119,8 @@ const EnquiriesPage = () => {
                     <div className="w-16 h-16 rounded-2xl bg-(--brand)/10 flex items-center justify-center mb-5">
                         <Mail className="w-8 h-8 text-(--brand)" />
                     </div>
-                    <h2 className="text-white font-semibold text-lg mb-2">No enquiries</h2>
-                    <p className="text-gray-500 text-sm max-w-xs">
+                    <h2 className="text-foreground font-semibold text-lg mb-2">No enquiries</h2>
+                    <p className="text-muted-foreground text-sm max-w-xs">
                         No enquiries received for this period. Try a wider date range.
                     </p>
                 </div>
@@ -131,53 +131,53 @@ const EnquiriesPage = () => {
                             {/* Day header */}
                             <div className="flex items-center gap-3 mb-3">
                                 <CalendarDays className="w-4 h-4 text-(--brand) shrink-0" />
-                                <span className="text-sm font-semibold text-white">{group.label}</span>
-                                <span className="text-xs text-gray-600">
+                                <span className="text-sm font-semibold text-foreground">{group.label}</span>
+                                <span className="text-xs text-muted-foreground/70">
                                     {group.items.length} {group.items.length === 1 ? "enquiry" : "enquiries"}
                                 </span>
-                                <div className="flex-1 h-px bg-white/5" />
+                                <div className="flex-1 h-px bg-border" />
                             </div>
 
                             {/* Enquiry cards */}
                             <div className="space-y-3">
                                 {group.items.map((e) => (
                                     <div key={e.id}
-                                        className="bg-zinc-900/60 border border-white/10 rounded-2xl px-6 py-4">
+                                        className="bg-card border border-border rounded-2xl px-6 py-4">
                                         <div className="flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-3 min-w-0">
                                                 <div className="w-9 h-9 rounded-xl bg-(--brand)/10 flex items-center justify-center shrink-0">
                                                     <User className="w-4 h-4 text-(--brand)" />
                                                 </div>
                                                 <div className="min-w-0">
-                                                    <p className="text-white font-semibold leading-tight">{e.name}</p>
-                                                    <p className="text-gray-600 text-xs">{fmtTime(e.submittedAt)}</p>
+                                                    <p className="text-foreground font-semibold leading-tight">{e.name}</p>
+                                                    <p className="text-muted-foreground/70 text-xs">{fmtTime(e.submittedAt)}</p>
                                                 </div>
                                             </div>
 
                                             <div className="flex items-center gap-4 shrink-0">
-                                                <div className="hidden sm:flex items-center gap-4 text-sm text-gray-400">
+                                                <div className="hidden sm:flex items-center gap-4 text-sm text-muted-foreground">
                                                     {e.phone && (
                                                         <span className="flex items-center gap-1.5">
-                                                            <Phone className="w-3.5 h-3.5 text-gray-600" />
+                                                            <Phone className="w-3.5 h-3.5 text-muted-foreground/70" />
                                                             {e.phone}
                                                         </span>
                                                     )}
                                                     {e.email && (
                                                         <span className="flex items-center gap-1.5">
-                                                            <Mail className="w-3.5 h-3.5 text-gray-600" />
+                                                            <Mail className="w-3.5 h-3.5 text-muted-foreground/70" />
                                                             {e.email}
                                                         </span>
                                                     )}
                                                     {e.address && (
                                                         <span className="flex items-center gap-1.5">
-                                                            <MapPin className="w-3.5 h-3.5 text-gray-600" />
+                                                            <MapPin className="w-3.5 h-3.5 text-muted-foreground/70" />
                                                             {e.address}
                                                         </span>
                                                     )}
                                                 </div>
                                                 <button
                                                     onClick={() => setDeleteId(e.id)}
-                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-500/20 text-red-400/70 hover:text-red-400 hover:border-red-500/40 text-xs font-medium transition-colors shrink-0"
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-500/20 text-red-600/70 hover:text-red-600 hover:border-red-500/40 text-xs font-medium transition-colors shrink-0"
                                                 >
                                                     <Trash2 className="w-3.5 h-3.5" />
                                                     Delete
@@ -187,7 +187,7 @@ const EnquiriesPage = () => {
 
                                         {/* Mobile: contact details below */}
                                         {(e.phone || e.email || e.address) && (
-                                            <div className="sm:hidden flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-gray-400">
+                                            <div className="sm:hidden flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-muted-foreground">
                                                 {e.phone && <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{e.phone}</span>}
                                                 {e.email && <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{e.email}</span>}
                                                 {e.address && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{e.address}</span>}

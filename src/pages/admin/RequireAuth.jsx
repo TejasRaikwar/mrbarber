@@ -7,7 +7,7 @@ const RequireAuth = ({ children, role }) => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-black text-gray-400 flex items-center justify-center text-sm">
+            <div className="min-h-screen bg-background text-muted-foreground flex items-center justify-center text-sm">
                 Loading…
             </div>
         )

@@ -47,7 +47,7 @@ const ServiceCard = ({ item, index }) => {
                 transformPerspective: 1000,
                 transformStyle: "preserve-3d"
             }}
-            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/30 rounded-3xl p-7 shadow-2xl transition-colors duration-500 overflow-hidden h-full flex flex-col cursor-pointer"
+            className="group relative bg-card backdrop-blur-md border border-border hover:border-(--brand)/30 rounded-3xl p-7 shadow-lg transition-colors duration-500 overflow-hidden h-full flex flex-col cursor-pointer"
         >
             {/* Mouse-following radial glow */}
             <motion.div
@@ -68,7 +68,7 @@ const ServiceCard = ({ item, index }) => {
 
             {/* Title */}
             <h3
-                className="text-xl font-bold text-white tracking-wide mb-3 group-hover:text-(--brand) transition-colors duration-300"
+                className="text-xl font-bold text-foreground tracking-wide mb-3 group-hover:text-(--brand) transition-colors duration-300"
                 style={{ transform: "translateZ(20px)" }}
             >
                 {item.title}
@@ -76,7 +76,7 @@ const ServiceCard = ({ item, index }) => {
 
             {/* Description */}
             <p
-                className="text-gray-400 text-sm leading-relaxed font-light"
+                className="text-muted-foreground text-sm leading-relaxed font-light"
                 style={{ transform: "translateZ(10px)" }}
             >
                 {item.description}

@@ -16,7 +16,7 @@ const ColorSwatchField = ({ label, value, onChange }) => {
     return (
         <div>
             {label && (
-                <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-2">
+                <label className="block text-xs uppercase tracking-[2px] text-muted-foreground mb-2">
                     {label}
                 </label>
             )}
@@ -30,7 +30,7 @@ const ColorSwatchField = ({ label, value, onChange }) => {
                             title={name}
                             onClick={() => onChange(hex)}
                             style={{ backgroundColor: hex }}
-                            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ring-offset-2 ring-offset-black ${selected ? "ring-2 ring-white" : "hover:scale-110"
+                            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ring-offset-2 ring-offset-background ${selected ? "ring-2 ring-foreground" : "hover:scale-110"
                                 }`}
                         >
                             {selected && <Check className="w-4 h-4 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]" strokeWidth={3} />}
@@ -41,15 +41,15 @@ const ColorSwatchField = ({ label, value, onChange }) => {
                 <label
                     title={isCustom ? `Custom (${value})` : "Pick a custom color"}
                     style={isCustom ? { backgroundColor: value } : undefined}
-                    className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer ring-offset-2 ring-offset-black ${isCustom
-                            ? "ring-2 ring-white"
-                            : "bg-white/5 border border-dashed border-white/20 hover:border-white/40"
+                    className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer ring-offset-2 ring-offset-background ${isCustom
+                            ? "ring-2 ring-foreground"
+                            : "bg-muted/70 border border-dashed border-border hover:border-foreground/40"
                         }`}
                 >
                     {isCustom ? (
                         <Check className="w-4 h-4 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]" strokeWidth={3} />
                     ) : (
-                        <Pipette className="w-4 h-4 text-gray-400" />
+                        <Pipette className="w-4 h-4 text-muted-foreground" />
                     )}
                     <input
                         type="color"

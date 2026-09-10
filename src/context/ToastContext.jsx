@@ -5,8 +5,8 @@ import { CheckCircle2, XCircle, Info, X } from "lucide-react"
 const ToastContext = createContext(null)
 
 const STYLES = {
-    success: { icon: CheckCircle2, border: "border-emerald-500/30", iconColor: "text-emerald-400" },
-    error: { icon: XCircle, border: "border-red-500/30", iconColor: "text-red-400" },
+    success: { icon: CheckCircle2, border: "border-emerald-500/30", iconColor: "text-emerald-600" },
+    error: { icon: XCircle, border: "border-red-500/30", iconColor: "text-red-600" },
     info: { icon: Info, border: "border-(--brand)/30", iconColor: "text-(--brand)" }
 }
 
@@ -52,13 +52,13 @@ export const ToastProvider = ({ children }) => {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, x: 40, transition: { duration: 0.2 } }}
                                 transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                                className={`pointer-events-auto flex items-start gap-3 bg-zinc-900/95 backdrop-blur-md border ${border} rounded-xl px-4 py-3 shadow-2xl`}
+                                className={`pointer-events-auto flex items-start gap-3 bg-card backdrop-blur-md border ${border} rounded-xl px-4 py-3 shadow-lg`}
                             >
                                 <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
-                                <p className="text-sm text-white flex-1 leading-snug">{t.message}</p>
+                                <p className="text-sm text-foreground flex-1 leading-snug">{t.message}</p>
                                 <button
                                     onClick={() => dismiss(t.id)}
-                                    className="text-gray-500 hover:text-white transition-colors shrink-0"
+                                    className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>

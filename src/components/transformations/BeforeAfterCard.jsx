@@ -37,7 +37,7 @@ const BeforeAfterCard = ({ item }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
-      className="bg-zinc-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-white/10 hover:border-(--brand)/20 transition-all duration-500 group shadow-2xl"
+      className="bg-card backdrop-blur-md rounded-3xl overflow-hidden border border-border hover:border-(--brand)/20 transition-all duration-500 group shadow-lg"
     >
       {/* Slider Interactive Window */}
       <div 
@@ -52,7 +52,7 @@ const BeforeAfterCard = ({ item }) => {
         onTouchEnd={() => setIsDragging(false)}
       >
         {/* After Image (Base Layer) */}
-        <div className="absolute inset-0 h-full w-full bg-zinc-950">
+        <div className="absolute inset-0 h-full w-full bg-muted">
           {item.after ? (
             <img
               src={item.after}
@@ -61,9 +61,9 @@ const BeforeAfterCard = ({ item }) => {
               onError={(e) => { e.currentTarget.style.display = "none" }}
             />
           ) : (
-            <div className="h-full w-full flex items-center justify-center text-gray-600 text-sm font-light">No image uploaded</div>
+            <div className="h-full w-full flex items-center justify-center text-muted-foreground/70 text-sm font-light">No image uploaded</div>
           )}
-          <div className="absolute right-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-(--brand)">
+          <div className="absolute right-4 top-4 z-10 bg-background/85 backdrop-blur-md border border-border px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-(--brand)">
             After
           </div>
         </div>
@@ -84,9 +84,9 @@ const BeforeAfterCard = ({ item }) => {
               onError={(e) => { e.currentTarget.style.display = "none" }}
             />
           ) : (
-            <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-600 text-sm font-light">No image uploaded</div>
+            <div className="h-full w-full bg-muted flex items-center justify-center text-muted-foreground/70 text-sm font-light">No image uploaded</div>
           )}
-          <div className="absolute left-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white">
+          <div className="absolute left-4 top-4 z-10 bg-background/85 backdrop-blur-md border border-border px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-foreground">
             Before
           </div>
         </div>
@@ -97,7 +97,7 @@ const BeforeAfterCard = ({ item }) => {
           style={{ left: `${sliderPosition}%` }}
         >
           {/* Slider Central Handle Indicator */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-(--brand) text-(--brand-foreground) border-4 border-black/80 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-(--brand) text-(--brand-foreground) border-4 border-background flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 pointer-events-none">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 24 24" 
@@ -116,11 +116,11 @@ const BeforeAfterCard = ({ item }) => {
       </div>
 
       {/* Description Info */}
-      <div className="p-6 border-t border-white/5 bg-zinc-950/40">
-        <h3 className="text-xl font-bold text-white tracking-wide group-hover:text-(--brand) transition-colors duration-300">
+      <div className="p-6 border-t border-border/60 bg-muted/40">
+        <h3 className="text-xl font-bold text-foreground tracking-wide group-hover:text-(--brand) transition-colors duration-300">
           {item.title}
         </h3>
-        <p className="text-gray-400 text-sm mt-1 font-light">
+        <p className="text-muted-foreground text-sm mt-1 font-light">
           Drag the handle or click anywhere to compare the results
         </p>
       </div>

@@ -8,7 +8,8 @@ import {
 import { useSectionNav } from "./useSectionNav"
 import { useSiteContent } from "@/context/SiteContentContext"
 
-const MobileMenu = () => {
+/** `overHero` = the bar is floating over hero photography, so the icon goes light. */
+const MobileMenu = ({ overHero = false }) => {
     const [open, setOpen] = useState(false)
     const { handleNavClick } = useSectionNav()
     const { navLinks } = useSiteContent()
@@ -22,16 +23,22 @@ const MobileMenu = () => {
         <div className="md:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger>
-                    <Menu className="text-white" />
+                    <Menu
+                        className={
+                            overHero
+                                ? "text-(--media-foreground) drop-shadow-md"
+                                : "text-foreground"
+                        }
+                    />
                 </SheetTrigger>
-                <SheetContent className="bg-black border-none">
+                <SheetContent className="bg-background border-none">
                     <div className="flex flex-col gap-6 mt-10 px-7">
                         {(navLinks || []).map((link) => (
                             <a
                                 key={link.id ?? link.label}
                                 href={`/${link.hash ? `#${link.hash}` : ""}`}
                                 onClick={(e) => onClick(e, link.hash)}
-                                className="text-white text-lg hover:text-(--brand) cursor-pointer"
+                                className="text-foreground text-lg hover:text-(--brand) cursor-pointer"
                             >
                                 {link.label}
                             </a>

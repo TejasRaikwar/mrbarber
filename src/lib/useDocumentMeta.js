@@ -1,11 +1,17 @@
 import { useEffect } from "react"
 import { getContrastForeground } from "./colorContrast"
 
-const DEFAULT_BRAND = "#eab308"
+const DEFAULT_BRAND = "#8b5e3c"
 
 /**
- * Keep <title>, the tab favicon, and the brand accent color in sync with admin-configured settings.
- * Falls back to the existing index.html/CSS values if a field is empty.
+ * Keep <title>, the tab favicon, and the admin-configured brand color in sync
+ * with site settings. Falls back to the existing index.html/CSS values if a
+ * field is empty.
+ *
+ * The brand color is published as --brand-site rather than --brand: each theme
+ * ships its own harmonized accent, and only the "Site Brand" theme opts into
+ * this one (see .theme-site in index.css). That keeps an inline style from
+ * overriding every palette.
  */
 export const useDocumentMeta = (settings) => {
     useEffect(() => {
@@ -27,8 +33,10 @@ export const useDocumentMeta = (settings) => {
         }
 
         const brand = settings.themeColor || DEFAULT_BRAND
-        document.documentElement.style.setProperty("--brand", brand)
-        document.documentElement.style.setProperty("--brand-foreground", getContrastForeground(brand))
+        document.documentElement.style.setProperty("--brand-site", brand)
+        document.documentElement.style.setProperty(
+            "--brand-site-foreground",
+            getContrastForeground(brand)
+        )
     }, [settings])
 }
-

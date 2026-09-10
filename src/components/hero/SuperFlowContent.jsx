@@ -37,7 +37,7 @@ const SuperFlowContent = ({ slide }) => {
 
       <motion.p
         variants={contentVariants.description}
-        className="text-base md:text-xl text-gray-300/90 leading-relaxed mb-8 max-w-2xl font-light"
+        className="text-base md:text-xl text-white/85 leading-relaxed mb-8 max-w-2xl font-light"
       >
         {slide.description}
       </motion.p>

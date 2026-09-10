@@ -8,17 +8,17 @@ const fmt = (val) => val != null ? `₹${Number(val).toLocaleString("en-IN")}` :
 const StatCard = ({ label, value, icon: Icon, accent = false, danger = false }) => {
     const tone =
         danger
-            ? { border: "border-red-500/30", iconBg: "bg-red-500/15", icon: "text-red-400", value: "text-red-400" }
+            ? { border: "border-red-500/30", iconBg: "bg-red-500/15", icon: "text-red-600", value: "text-red-600" }
             : accent
             ? { border: "border-(--brand)/30", iconBg: "bg-(--brand)/15", icon: "text-(--brand)", value: "text-(--brand)" }
-            : { border: "border-white/10", iconBg: "bg-white/5", icon: "text-gray-400", value: "text-white" }
+            : { border: "border-border", iconBg: "bg-muted/70", icon: "text-muted-foreground", value: "text-foreground" }
     return (
-        <div className={`bg-zinc-900/60 border ${tone.border} rounded-2xl p-6 flex items-start gap-4`}>
+        <div className={`bg-card border ${tone.border} rounded-2xl p-6 flex items-start gap-4`}>
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${tone.iconBg}`}>
                 <Icon className={`w-5 h-5 ${tone.icon}`} />
             </div>
             <div>
-                <p className="text-xs uppercase tracking-[2px] text-gray-500 mb-1">{label}</p>
+                <p className="text-xs uppercase tracking-[2px] text-muted-foreground mb-1">{label}</p>
                 <p className={`text-2xl font-bold ${tone.value}`}>{value}</p>
             </div>
         </div>
@@ -38,12 +38,12 @@ const DashboardPage = () => {
             <PageHeader title="Dashboard" description="Overview of income, expenses and activity." />
 
             {loading ? (
-                <p className="text-gray-500 text-sm">Loading…</p>
+                <p className="text-muted-foreground text-sm">Loading…</p>
             ) : (
                 <div className="space-y-8">
                     {/* Income */}
                     <div>
-                        <p className="text-xs uppercase tracking-[2px] text-gray-500 mb-4">Income</p>
+                        <p className="text-xs uppercase tracking-[2px] text-muted-foreground mb-4">Income</p>
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                             <StatCard label="Today" value={fmt(stats?.dailyIncome)} icon={IndianRupee} accent />
                             <StatCard label="This Month" value={fmt(stats?.monthlyIncome)} icon={IndianRupee} accent />
@@ -54,7 +54,7 @@ const DashboardPage = () => {
 
                     {/* Expenses */}
                     <div>
-                        <p className="text-xs uppercase tracking-[2px] text-gray-500 mb-4">Expenses</p>
+                        <p className="text-xs uppercase tracking-[2px] text-muted-foreground mb-4">Expenses</p>
                         <div className="grid grid-cols-2 gap-4">
                             <StatCard label="Employee Spending (Monthly)"
                                 value={fmt(stats?.employeeSpending)} icon={Wallet} danger />
@@ -64,7 +64,7 @@ const DashboardPage = () => {
 
                     {/* Activity */}
                     <div>
-                        <p className="text-xs uppercase tracking-[2px] text-gray-500 mb-4">Activity</p>
+                        <p className="text-xs uppercase tracking-[2px] text-muted-foreground mb-4">Activity</p>
                         <div className="grid grid-cols-2 gap-4">
                             <StatCard label="Total Appointments" value={stats?.totalAppointments ?? 0} icon={CalendarDays} />
                             <StatCard label="Total Enquiries" value={stats?.totalEnquiries ?? 0} icon={MessageSquare} />

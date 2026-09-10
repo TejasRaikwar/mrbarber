@@ -28,7 +28,7 @@ const Footer = () => {
         settings?.copyrightText || `© ${new Date().getFullYear()} ${siteName}. All rights reserved.`
 
     return (
-        <footer className="bg-black border-t border-white/10 relative overflow-hidden">
+        <footer className="bg-card border-t border-border relative overflow-hidden">
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-150 h-60 bg-(--brand)/4 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 pt-16 pb-8 relative">
@@ -46,11 +46,11 @@ const Footer = () => {
                             ) : (
                                 <Scissors className="text-(--brand) w-6 h-6" />
                             )}
-                            <h2 className="text-2xl font-bold text-white tracking-wide">
+                            <h2 className="text-2xl font-bold text-foreground tracking-wide">
                                 {siteName}
                             </h2>
                         </div>
-                        <p className="text-gray-400 text-sm leading-relaxed font-light mb-6">
+                        <p className="text-muted-foreground text-sm leading-relaxed font-light mb-6">
                             {description}
                         </p>
                         <div className="flex items-center gap-3">
@@ -64,7 +64,7 @@ const Footer = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label={s.platform}
-                                        className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-(--brand-foreground) hover:bg-(--brand) hover:border-(--brand) transition-all duration-300"
+                                        className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-(--brand-foreground) hover:bg-(--brand) hover:border-(--brand) transition-all duration-300"
                                     >
                                         <Icon className="w-4 h-4" strokeWidth={1.75} />
                                     </a>
@@ -84,7 +84,7 @@ const Footer = () => {
                                     <a
                                         href={`/${link.hash ? `#${link.hash}` : ""}`}
                                         onClick={(e) => handleNavClick(e, link.hash)}
-                                        className="text-gray-400 hover:text-(--brand) text-sm transition-colors cursor-pointer"
+                                        className="text-muted-foreground hover:text-(--brand) text-sm transition-colors cursor-pointer"
                                     >
                                         {link.label}
                                     </a>
@@ -104,7 +104,7 @@ const Footer = () => {
                                     <a
                                         href="/#services"
                                         onClick={(e) => handleNavClick(e, "services")}
-                                        className="text-gray-400 hover:text-(--brand) text-sm transition-colors cursor-pointer"
+                                        className="text-muted-foreground hover:text-(--brand) text-sm transition-colors cursor-pointer"
                                     >
                                         {s.title}
                                     </a>
@@ -120,7 +120,7 @@ const Footer = () => {
                         </h3>
                         <ul className="space-y-4">
                             {address && (
-                                <li className="flex items-start gap-3 text-sm text-gray-400">
+                                <li className="flex items-start gap-3 text-sm text-muted-foreground">
                                     <MapPin className="w-4 h-4 text-(--brand) shrink-0 mt-0.5" strokeWidth={1.75} />
                                     <span className="font-light leading-relaxed">{address}</span>
                                 </li>
@@ -130,7 +130,7 @@ const Footer = () => {
                                     <Phone className="w-4 h-4 text-(--brand) shrink-0" strokeWidth={2} />
                                     <a
                                         href={`tel:${phone.replace(/\s/g, "")}`}
-                                        className="text-gray-400 hover:text-(--brand) transition-colors"
+                                        className="text-muted-foreground hover:text-(--brand) transition-colors"
                                     >
                                         {phone}
                                     </a>
@@ -141,7 +141,7 @@ const Footer = () => {
                                     <Mail className="w-4 h-4 text-(--brand) shrink-0" strokeWidth={2} />
                                     <a
                                         href={`mailto:${email}`}
-                                        className="text-gray-400 hover:text-(--brand) transition-colors"
+                                        className="text-muted-foreground hover:text-(--brand) transition-colors"
                                     >
                                         {email}
                                     </a>
@@ -151,9 +151,9 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="mt-14 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-gray-500 text-xs">{copyright}</p>
-                    <div className="flex items-center gap-6 text-xs text-gray-500">
+                <div className="mt-14 pt-6 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-muted-foreground text-xs">{copyright}</p>
+                    <div className="flex items-center gap-6 text-xs text-muted-foreground">
                         <a href="#" className="hover:text-(--brand) transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-(--brand) transition-colors">Terms of Service</a>
                         <Link to="/admin/login" className="hover:text-(--brand) transition-colors">Login</Link>

@@ -116,9 +116,9 @@ const LocationsPage = () => {
             />
 
             {loading ? (
-                <p className="text-gray-500 text-sm">Loading…</p>
+                <p className="text-muted-foreground text-sm">Loading…</p>
             ) : items.length === 0 ? (
-                <p className="text-gray-500 text-sm">No locations yet.</p>
+                <p className="text-muted-foreground text-sm">No locations yet.</p>
             ) : (
                 <div className="space-y-6">
                     {items.map((loc, idx) => (
@@ -159,7 +159,7 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
     }
 
     return (
-        <div className="bg-zinc-900/60 border border-white/10 rounded-2xl p-6">
+        <div className="bg-card border border-border rounded-2xl p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <TextField label="City" value={loc.city} onChange={(v) => onChange({ city: v })} required />
                 <TextField label="WhatsApp (digits, with country code)" value={loc.whatsapp} onChange={(v) => onChange({ whatsapp: v })} />
@@ -171,7 +171,7 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                         rows={2}
                         placeholder="Paste the Google Maps 'Embed a map' link (or the whole <iframe> snippet)"
                     />
-                    <p className="text-xs text-gray-500 mt-1.5">
+                    <p className="text-xs text-muted-foreground mt-1.5">
                         In Google Maps: search the location → Share → Embed a map → Copy HTML, then paste it here (the iframe src is extracted automatically).
                     </p>
                 </div>
@@ -181,9 +181,9 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                 <NumberField label="Order" value={loc.displayOrder} onChange={(v) => onChange({ displayOrder: v })} />
             </div>
 
-            <div className="mt-6 pt-5 border-t border-white/5">
+            <div className="mt-6 pt-5 border-t border-border/60">
                 <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm uppercase tracking-[2px] text-gray-500">Phone Contacts</h4>
+                    <h4 className="text-sm uppercase tracking-[2px] text-muted-foreground">Phone Contacts</h4>
                     <button
                         onClick={addContact}
                         className="text-xs text-(--brand) hover:text-(--brand-hover) inline-flex items-center gap-1"
@@ -199,17 +199,17 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                                 value={c.label || ""}
                                 onChange={(e) => updateContact(cIdx, { label: e.target.value })}
                                 placeholder="Label (e.g. Home Trial)"
-                                className="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none"
+                                className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none"
                             />
                             <input
                                 value={c.phone || ""}
                                 onChange={(e) => updateContact(cIdx, { phone: e.target.value })}
                                 placeholder="+91 ..."
-                                className="flex-1 bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none"
+                                className="flex-1 bg-background border border-border rounded-lg px-3 py-2 text-sm outline-none"
                             />
                             <button
                                 onClick={() => removeContact(cIdx)}
-                                className="text-gray-500 hover:text-red-400 p-2"
+                                className="text-muted-foreground hover:text-red-600 p-2"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -218,8 +218,8 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                 </div>
             </div>
 
-            <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/5">
-                <span className="text-xs text-gray-500">{loc.id ? `ID: ${loc.id}` : "Unsaved"}</span>
+            <div className="flex items-center justify-between mt-6 pt-5 border-t border-border/60">
+                <span className="text-xs text-muted-foreground">{loc.id ? `ID: ${loc.id}` : "Unsaved"}</span>
                 <div className="flex gap-3">
                     <Button variant="danger" onClick={onDelete}>
                         <span className="inline-flex items-center gap-2">

@@ -5,6 +5,37 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mrbarber</title>
+    <script>
+      // Apply the theme before first paint so the page never flashes the
+      // default palette, using the last theme fetched from Site Settings
+      // (cached purely for this — the database row is always the real source).
+      // Class list mirrors src/lib/themes.js.
+      (function () {
+        var classes = {
+          beige: "",
+          latte: "theme-latte",
+          walnut: "theme-walnut",
+          clay: "theme-clay",
+          olive: "theme-olive",
+          emerald: "theme-emerald",
+          teal: "theme-teal",
+          navy: "theme-navy",
+          burgundy: "theme-burgundy",
+          plum: "theme-plum",
+          gold: "theme-gold",
+          mono: "theme-mono",
+          site: "theme-site",
+          midnight: "dark",
+          noir: "dark theme-noir"
+        }
+        try {
+          var cls = classes[localStorage.getItem("site-theme-cache")]
+          if (cls) document.documentElement.classList.add.apply(
+            document.documentElement.classList, cls.split(" ")
+          )
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

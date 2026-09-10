@@ -40,7 +40,7 @@ const SuperFlowSlice = ({
         )}
       </motion.div>
       {/* Dynamic Overlay inside slice */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-r from-(--media-bg)/85 via-(--media-bg)/55 to-(--media-bg)/75" />
     </motion.div>
   )
 }

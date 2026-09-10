@@ -51,4 +51,12 @@ public class SiteSettings {
     /** Site-wide accent color (hex), admin-selectable from a preset palette. */
     @Builder.Default
     private String themeColor = "#eab308";
+
+    /**
+     * Id of the active palette, e.g. "beige" or "navy". Mirrors the registry in
+     * src/lib/themes.js; the backend resolves it via ThemePalette when rendering
+     * email so mail matches the site.
+     */
+    @Builder.Default
+    private String themeId = "beige";
 }

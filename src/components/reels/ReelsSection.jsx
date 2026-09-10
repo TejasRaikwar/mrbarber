@@ -9,7 +9,7 @@ const ReelsSection = () => {
     if (!reels || reels.length === 0) return null
 
     return (
-        <section className="py-16 bg-black border-t border-white/5 overflow-hidden">
+        <section className="py-16 bg-muted/40 border-y border-border overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <SectionHeading
                     eyebrow="Our Craft in Motion"
@@ -38,7 +38,7 @@ const ReelCard = ({ reel }) => {
     // Removed complex custom play/mute controls in favor of native controls to ensure best cross-browser mobile experience and reliability.
 
     return (
-        <div className="relative group rounded-2xl overflow-hidden bg-zinc-950 border border-white/10 snap-center w-[280px] sm:w-[320px] aspect-[9/16] shadow-2xl flex-shrink-0">
+        <div className="relative group rounded-2xl overflow-hidden bg-(--media-bg) border border-border snap-center w-[280px] sm:w-[320px] aspect-[9/16] shadow-lg flex-shrink-0">
             <video
                 ref={videoRef}
                 src={reel.videoUrl}
@@ -50,7 +50,7 @@ const ReelCard = ({ reel }) => {
             />
             
             <div className="absolute top-0 left-0 w-full p-4 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
-                <h3 className="text-white font-medium text-lg drop-shadow-md line-clamp-2">
+                <h3 className="text-(--media-foreground) font-medium text-lg drop-shadow-md line-clamp-2">
                     {reel.title}
                 </h3>
             </div>

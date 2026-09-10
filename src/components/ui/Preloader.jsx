@@ -41,7 +41,7 @@ const Preloader = ({ onComplete }) => {
               ease: [0.76, 0, 0.24, 1], // Pure cinematic cubic-bezier ease
             },
           }}
-          className="fixed inset-0 bg-black z-[9999] flex flex-col items-center justify-center select-none"
+          className="fixed inset-0 bg-background z-[9999] flex flex-col items-center justify-center select-none"
         >
           {/* Main loader content */}
           <div className="flex flex-col items-center gap-6">
@@ -83,7 +83,7 @@ const Preloader = ({ onComplete }) => {
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
-                  className={`text-2xl md:text-3xl font-bold tracking-widest text-white ${
+                  className={`text-2xl md:text-3xl font-bold tracking-widest text-foreground ${
                     letter === " " ? "w-3" : ""
                   }`}
                 >

@@ -13,12 +13,12 @@ const SectionHeading = ({ eyebrow, title, description, className = "" }) => {
                 {eyebrow}
             </p>
 
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
                 {title}
             </h2>
 
             {typeof description === "string" ? (
-                <p className="text-gray-400 max-w-2xl mx-auto">{description}</p>
+                <p className="text-muted-foreground max-w-2xl mx-auto">{description}</p>
             ) : (
                 description
             )}

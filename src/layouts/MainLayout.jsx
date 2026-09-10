@@ -6,7 +6,7 @@ import AmbientBackground from "@/components/ui/AmbientBackground"
 
 const MainLayout = () => {
     return (
-        <div className="text-white min-h-screen flex flex-col relative">
+        <div className="text-foreground min-h-screen flex flex-col relative">
             <AmbientBackground />
             <Navbar />
             <main className="flex-1">

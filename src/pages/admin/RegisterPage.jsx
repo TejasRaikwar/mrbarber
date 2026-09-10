@@ -11,8 +11,8 @@ const RegisterPage = () => (
             <div className="w-16 h-16 rounded-2xl bg-(--brand)/10 flex items-center justify-center mb-5">
                 <UserPlus className="w-8 h-8 text-(--brand)" />
             </div>
-            <h2 className="text-white font-semibold text-lg mb-2">Coming Soon</h2>
-            <p className="text-gray-500 text-sm max-w-xs">
+            <h2 className="text-foreground font-semibold text-lg mb-2">Coming Soon</h2>
+            <p className="text-muted-foreground text-sm max-w-xs">
                 Staff registration and account management will be available here.
             </p>
         </div>

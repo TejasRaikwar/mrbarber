@@ -8,7 +8,7 @@ const ReviewCard = ({ item, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-50px" }}
-            className="group relative bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/30 rounded-3xl p-7 md:p-8 shadow-2xl transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
+            className="group relative bg-card backdrop-blur-md border border-border hover:border-(--brand)/30 rounded-3xl p-7 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-1 flex flex-col h-full"
         >
             <Quote
                 className="absolute top-6 right-6 w-10 h-10 text-(--brand)/10 group-hover:text-(--brand)/20 transition-colors duration-500"
@@ -22,17 +22,17 @@ const ReviewCard = ({ item, index }) => {
                         className={`w-4 h-4 ${
                             i < item.rating
                                 ? "fill-(--brand) text-(--brand)"
-                                : "fill-zinc-700 text-zinc-700"
+                                : "fill-muted-foreground/25 text-muted-foreground/25"
                         }`}
                     />
                 ))}
             </div>
 
-            <p className="text-gray-300 text-base leading-relaxed font-light flex-1">
+            <p className="text-foreground/80 text-base leading-relaxed font-light flex-1">
                 &ldquo;{item.quote}&rdquo;
             </p>
 
-            <div className="flex items-center gap-4 mt-7 pt-6 border-t border-white/5">
+            <div className="flex items-center gap-4 mt-7 pt-6 border-t border-border/60">
                 {item.avatarUrl ? (
                     <img
                         src={item.avatarUrl}
@@ -45,11 +45,11 @@ const ReviewCard = ({ item, index }) => {
                     </div>
                 )}
                 <div className="min-w-0">
-                    <h4 className="text-white font-semibold tracking-wide truncate">
+                    <h4 className="text-foreground font-semibold tracking-wide truncate">
                         {item.name}
                     </h4>
                     {item.location && (
-                        <p className="text-gray-500 text-xs uppercase tracking-[2px] mt-0.5">
+                        <p className="text-muted-foreground text-xs uppercase tracking-[2px] mt-0.5">
                             {item.location}
                         </p>
                     )}

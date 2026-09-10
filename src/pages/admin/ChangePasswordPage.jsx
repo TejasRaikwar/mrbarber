@@ -78,7 +78,7 @@ const ChangePasswordPage = () => {
                     required
                 />
 
-                {error && <p className="text-red-400 text-sm">{error}</p>}
+                {error && <p className="text-red-600 text-sm">{error}</p>}
                 {info && <p className="text-(--brand) text-sm">{info}</p>}
 
                 <Button type="submit" disabled={submitting}>

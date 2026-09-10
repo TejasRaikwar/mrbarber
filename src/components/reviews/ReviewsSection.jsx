@@ -31,7 +31,7 @@ const ReviewsSection = () => {
                     eyebrow="Testimonials"
                     title="What Our Customers Say"
                     description={
-                        <p className="text-gray-400 max-w-2xl mx-auto">
+                        <p className="text-muted-foreground max-w-2xl mx-auto">
                             Real stories from men who&apos;ve transformed their look —
                             averaging{" "}
                             <span className="text-(--brand) font-semibold">

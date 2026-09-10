@@ -103,9 +103,9 @@ const CrudPage = ({ schema }) => {
             />
 
             {loading ? (
-                <p className="text-gray-500 text-sm">Loading…</p>
+                <p className="text-muted-foreground text-sm">Loading…</p>
             ) : items.length === 0 ? (
-                <p className="text-gray-500 text-sm">No items yet. Click "New" to add one.</p>
+                <p className="text-muted-foreground text-sm">No items yet. Click "New" to add one.</p>
             ) : (
                 <div className="space-y-4">
                     {items.map((item, idx) => (
@@ -153,7 +153,7 @@ const ItemEditor = ({ schema, item, navLinks, onChange, onSave, onDelete }) => {
     }
 
     return (
-        <div className="bg-zinc-900/60 border border-white/10 rounded-2xl p-6">
+        <div className="bg-card border border-border rounded-2xl p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {schema.fields.map((f) => (
                     <div key={f.key} className={f.fullWidth ? "md:col-span-2" : ""}>
@@ -194,11 +194,11 @@ const ItemEditor = ({ schema, item, navLinks, onChange, onSave, onDelete }) => {
                         )}
                         {f.type === "navlink-select" && (
                             <div>
-                                <label className="block text-xs uppercase tracking-[2px] text-gray-500 mb-2">{f.label}</label>
+                                <label className="block text-xs uppercase tracking-[2px] text-muted-foreground mb-2">{f.label}</label>
                                 <select
                                     value={item[f.key] ?? ""}
                                     onChange={(e) => onChange(f.key, e.target.value)}
-                                    className="w-full bg-zinc-900 border border-white/10 focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-white"
+                                    className="w-full bg-card border border-border focus:border-(--brand)/50 rounded-lg px-3 py-2.5 outline-none text-foreground"
                                 >
                                     <option value="">— none —</option>
                                     {(navLinks || []).map((nl) => (
@@ -213,8 +213,8 @@ const ItemEditor = ({ schema, item, navLinks, onChange, onSave, onDelete }) => {
                 ))}
             </div>
 
-            <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/5">
-                <span className="text-xs text-gray-500">
+            <div className="flex items-center justify-between mt-6 pt-5 border-t border-border/60">
+                <span className="text-xs text-muted-foreground">
                     {item.id ? `ID: ${item.id}` : "Unsaved"}
                     {savedAt && " · Saved"}
                 </span>

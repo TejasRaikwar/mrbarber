@@ -1,7 +1,8 @@
 import { useSectionNav } from "./useSectionNav"
 import { useSiteContent } from "@/context/SiteContentContext"
 
-const Navlinks = () => {
+/** `overHero` = the bar is floating over hero photography, so links go light. */
+const Navlinks = ({ overHero = false }) => {
     const { handleNavClick } = useSectionNav()
     const { navLinks } = useSiteContent()
 
@@ -12,7 +13,11 @@ const Navlinks = () => {
                     key={link.id ?? link.label}
                     href={`/${link.hash ? `#${link.hash}` : ""}`}
                     onClick={(e) => handleNavClick(e, link.hash)}
-                    className="text-white hover:text-(--brand) transition-all duration-300 cursor-pointer"
+                    className={`transition-all duration-300 cursor-pointer ${
+                        overHero
+                            ? "text-(--media-foreground)/90 hover:text-(--media-foreground) drop-shadow-md"
+                            : "text-foreground hover:text-(--brand)"
+                    }`}
                 >
                     {link.label}
                 </a>

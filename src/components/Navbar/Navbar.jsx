@@ -20,11 +20,16 @@ const Navbar = () => {
     const [logoError, setLogoError] = useState(false)
     const logoUrl = !logoError && settings?.logoUrl ? settings.logoUrl : null
 
+    // At the top of the page the bar floats over the hero photography, so it
+    // uses the light media palette. Once scrolled it gains a solid backdrop
+    // and switches to the active theme's colors.
+    const overHero = !scrolled
+
     return (
         <header
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
                 scrolled
-                    ? "bg-black/70 backdrop-blur-lg border-b border-white/10"
+                    ? "bg-background/85 backdrop-blur-lg border-b border-border"
                     : "bg-transparent border-b border-transparent"
             }`}
         >
@@ -40,24 +45,38 @@ const Navbar = () => {
                             onError={() => setLogoError(true)}
                         />
                     ) : (
-                        <Scissors className="text-(--brand)" />
+                        <Scissors
+                            className={overHero ? "text-(--media-foreground)" : "text-(--brand)"}
+                        />
                     )}
-                    <h1 className="text-2xl font-bold text-white tracking-wide">
+                    <h1
+                        className={`text-2xl font-bold tracking-wide transition-colors duration-300 ${
+                            overHero
+                                ? "text-(--media-foreground) drop-shadow-md"
+                                : "text-foreground"
+                        }`}
+                    >
                         {siteName}
                     </h1>
                 </a>
 
-                <Navlinks />
+                <Navlinks overHero={overHero} />
 
                 <EnquiryDialog
                     trigger={
-                        <button className="hidden cursor-pointer md:block bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) px-5 py-2 rounded-lg font-medium transition-all duration-300">
+                        <button
+                            className={`hidden cursor-pointer md:block px-5 py-2 rounded-lg font-medium transition-all duration-300 ${
+                                overHero
+                                    ? "bg-(--media-foreground) text-(--media-bg) hover:bg-(--brand) hover:text-(--brand-foreground)"
+                                    : "bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground)"
+                            }`}
+                        >
                             Enquire Now
                         </button>
                     }
                 />
 
-                <MobileMenu />
+                <MobileMenu overHero={overHero} />
             </div>
         </header>
     )

@@ -15,10 +15,10 @@ const LocationCard = ({ item, index }) => {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-80px" }}
-            className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
+            className="grid grid-cols-1 lg:grid-cols-2 bg-card backdrop-blur-md border border-border hover:border-(--brand)/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-lg group cursor-pointer"
         >
             {/* Map */}
-            <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden bg-zinc-950 flex items-center justify-center">
+            <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden bg-muted flex items-center justify-center">
                 {mapSrc ? (
                     <iframe
                         src={mapSrc}
@@ -30,18 +30,18 @@ const LocationCard = ({ item, index }) => {
                         allowFullScreen
                     />
                 ) : (
-                    <div className="text-gray-600 text-sm font-light">Map not available</div>
+                    <div className="text-muted-foreground/70 text-sm font-light">Map not available</div>
                 )}
 
                 {/* City badge */}
-                <div className="absolute top-5 left-5 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[3px] text-(--brand)">
+                <div className="absolute top-5 left-5 bg-background/85 backdrop-blur-md border border-border px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[3px] text-(--brand)">
                     Visit Us
                 </div>
             </div>
 
             {/* Details */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
-                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-6">
                     {item.city}
                 </h3>
 
@@ -52,7 +52,7 @@ const LocationCard = ({ item, index }) => {
                             className="w-5 h-5 text-(--brand) shrink-0 mt-1"
                             strokeWidth={1.75}
                         />
-                        <div className="text-gray-300 font-light leading-relaxed">
+                        <div className="text-foreground/80 font-light leading-relaxed">
                             {addresses.map((line, i) => (
                                 <p key={i}>{line}</p>
                             ))}
@@ -70,12 +70,12 @@ const LocationCard = ({ item, index }) => {
                                     strokeWidth={2}
                                 />
                                 <div className="flex flex-wrap items-baseline gap-x-2">
-                                    <span className="text-gray-500 text-xs uppercase tracking-[2px]">
+                                    <span className="text-muted-foreground text-xs uppercase tracking-[2px]">
                                         {contact.label}
                                     </span>
                                     <a
                                         href={`tel:${(contact?.phone || "").replace(/\s/g, "")}`}
-                                        className="text-white font-medium hover:text-(--brand) transition-colors"
+                                        className="text-foreground font-medium hover:text-(--brand) transition-colors"
                                     >
                                         {contact.phone}
                                     </a>
@@ -101,7 +101,7 @@ const LocationCard = ({ item, index }) => {
                             href={`https://wa.me/${item.whatsapp}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 border border-white/20 hover:border-(--brand) hover:text-(--brand) text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
+                            className="inline-flex items-center gap-2 border border-border hover:border-(--brand) hover:text-(--brand) text-foreground px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
                         >
                             <MessageCircle className="w-4 h-4" strokeWidth={2.5} />
                             WhatsApp

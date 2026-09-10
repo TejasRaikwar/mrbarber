@@ -34,6 +34,9 @@ public class AdminSettingsController {
         existing.setFooterEmail(body.getFooterEmail());
         existing.setCopyrightText(body.getCopyrightText());
         existing.setThemeColor(body.getThemeColor());
+        if (body.getThemeId() != null && !body.getThemeId().isBlank()) {
+            existing.setThemeId(body.getThemeId());
+        }
         return repo.save(existing);
     }
 }
