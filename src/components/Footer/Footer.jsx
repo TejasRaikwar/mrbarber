@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Scissors, Mail, Phone, MapPin } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useSectionNav } from "@/components/Navbar/useSectionNav"
@@ -15,7 +16,8 @@ const Footer = () => {
     const { settings, navLinks, services, socialLinks } = useSiteContent()
 
     const siteName = settings?.siteName || "MR BARBER"
-    const logoUrl = settings?.logoUrl
+    const [logoError, setLogoError] = useState(false)
+    const logoUrl = !logoError && settings?.logoUrl ? settings.logoUrl : null
     const description =
         settings?.footerDescription ||
         "Premium hair systems and expert styling — crafted with precision, designed around you."
@@ -35,7 +37,12 @@ const Footer = () => {
                     <div className="lg:col-span-1">
                         <div className="flex items-center gap-2 mb-5">
                             {logoUrl ? (
-                                <img src={logoUrl} alt={siteName} className="h-7 w-auto object-contain" />
+                                <img
+                                    src={logoUrl}
+                                    alt={siteName}
+                                    className="h-7 w-auto object-contain"
+                                    onError={() => setLogoError(true)}
+                                />
                             ) : (
                                 <Scissors className="text-(--brand) w-6 h-6" />
                             )}

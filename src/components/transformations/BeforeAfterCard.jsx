@@ -58,9 +58,10 @@ const BeforeAfterCard = ({ item }) => {
               src={item.after}
               alt=""
               className="h-full w-full object-cover select-none pointer-events-none"
+              onError={(e) => { e.currentTarget.style.display = "none" }}
             />
           ) : (
-            <div className="h-full w-full flex items-center justify-center text-gray-700 text-sm">No image</div>
+            <div className="h-full w-full flex items-center justify-center text-gray-600 text-sm font-light">No image uploaded</div>
           )}
           <div className="absolute right-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-(--brand)">
             After
@@ -80,9 +81,10 @@ const BeforeAfterCard = ({ item }) => {
               src={item.before}
               alt=""
               className="h-full w-full object-cover select-none pointer-events-none"
+              onError={(e) => { e.currentTarget.style.display = "none" }}
             />
           ) : (
-            <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-700 text-sm">No image</div>
+            <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-600 text-sm font-light">No image uploaded</div>
           )}
           <div className="absolute left-4 top-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-white">
             Before

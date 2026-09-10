@@ -37,6 +37,7 @@ public class AdminLocationController {
                 .orElseThrow(() -> new NotFoundException("Location " + id + " not found"));
         existing.setCity(body.getCity());
         existing.setImageUrl(body.getImageUrl());
+        existing.setMapEmbedUrl(body.getMapEmbedUrl());
         existing.setAddress(body.getAddress());
         existing.setWhatsapp(body.getWhatsapp());
         existing.setDisplayOrder(body.getDisplayOrder());

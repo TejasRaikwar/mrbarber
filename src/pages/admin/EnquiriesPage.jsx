@@ -1,7 +1,9 @@
 import { useEffect, useState, useMemo } from "react"
 import { Trash2, Mail, Phone, MapPin, User, CalendarDays } from "lucide-react"
 import { api } from "@/api/client"
+import { useToast } from "@/context/ToastContext"
 import { PageHeader, Button } from "./components/FormFields"
+import ConfirmDialog from "./components/ConfirmDialog"
 
 const FILTERS = [
     { key: "today",  label: "Today" },
@@ -45,17 +47,29 @@ const fmtTime = (iso) => {
 const dateKey = (iso) => new Date(iso).toDateString()
 
 const EnquiriesPage = () => {
+    const toast = useToast()
     const [all, setAll] = useState([])
     const [filter, setFilter] = useState("month")
+    const [deleteId, setDeleteId] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     useEffect(() => {
         api.listEnquiries().then(setAll)
     }, [])
 
-    const handleDelete = async (id) => {
-        if (!confirm("Delete this enquiry?")) return
-        await api.deleteEnquiry(id)
-        setAll((prev) => prev.filter((e) => e.id !== id))
+    const handleConfirmDelete = async () => {
+        if (!deleteId) return
+        setDeleting(true)
+        try {
+            await api.deleteEnquiry(deleteId)
+            setAll((prev) => prev.filter((e) => e.id !== deleteId))
+            setDeleteId(null)
+            toast.success("Enquiry deleted")
+        } catch (err) {
+            toast.error(err.message || "Failed to delete enquiry")
+        } finally {
+            setDeleting(false)
+        }
     }
 
     const filtered = useMemo(() => {
@@ -162,7 +176,7 @@ const EnquiriesPage = () => {
                                                     )}
                                                 </div>
                                                 <button
-                                                    onClick={() => handleDelete(e.id)}
+                                                    onClick={() => setDeleteId(e.id)}
                                                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-500/20 text-red-400/70 hover:text-red-400 hover:border-red-500/40 text-xs font-medium transition-colors shrink-0"
                                                 >
                                                     <Trash2 className="w-3.5 h-3.5" />
@@ -186,6 +200,17 @@ const EnquiriesPage = () => {
                     ))}
                 </div>
             )}
+
+            <ConfirmDialog
+                open={!!deleteId}
+                onOpenChange={(open) => !open && setDeleteId(null)}
+                title="Delete Enquiry"
+                description="Are you sure you want to delete this enquiry? This action cannot be undone."
+                confirmLabel="Delete"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </>
     )
 }

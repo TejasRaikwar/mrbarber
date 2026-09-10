@@ -1,6 +1,7 @@
 import './App.css'
 import AppRoutes from './routes/AppRoutes'
 import { SiteContentProvider, useSiteContent } from '@/context/SiteContentContext'
+import { ToastProvider } from '@/context/ToastContext'
 import { useDocumentMeta } from '@/lib/useDocumentMeta'
 
 const MetaSync = ({ children }) => {
@@ -11,11 +12,13 @@ const MetaSync = ({ children }) => {
 
 function App() {
   return (
-    <SiteContentProvider>
-      <MetaSync>
-        <AppRoutes />
-      </MetaSync>
-    </SiteContentProvider>
+    <ToastProvider>
+      <SiteContentProvider>
+        <MetaSync>
+          <AppRoutes />
+        </MetaSync>
+      </SiteContentProvider>
+    </ToastProvider>
   )
 }
 

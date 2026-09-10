@@ -1,8 +1,12 @@
 import { motion } from "framer-motion"
 import { Phone, MessageCircle, MapPin } from "lucide-react"
+import { extractMapEmbedSrc } from "@/lib/utils"
 
 const LocationCard = ({ item, index }) => {
-    const primaryPhone = item.contacts[0]?.phone.replace(/\s/g, "")
+    const primaryPhone = (item?.contacts?.[0]?.phone || "").replace(/\s/g, "")
+    const addresses = Array.isArray(item?.address) ? item.address : []
+    const contacts = Array.isArray(item?.contacts) ? item.contacts : []
+    const mapSrc = extractMapEmbedSrc(item?.mapEmbedUrl)
 
     return (
         <motion.div
@@ -13,16 +17,21 @@ const LocationCard = ({ item, index }) => {
             viewport={{ once: true, margin: "-80px" }}
             className="grid grid-cols-1 lg:grid-cols-2 bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-(--brand)/20 transition-all duration-500 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer"
         >
-            {/* Image */}
-            <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden">
-                <img
-                    src={item.image}
-                    alt={`Mr Barber ${item.city}`}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    draggable={false}
-                    onError={(e) => { e.currentTarget.style.display = "none" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
+            {/* Map */}
+            <div className="relative h-72 sm:h-96 lg:h-auto min-h-[420px] overflow-hidden bg-zinc-950 flex items-center justify-center">
+                {mapSrc ? (
+                    <iframe
+                        src={mapSrc}
+                        title={`Map to Mr Barber ${item.city || ""}`}
+                        className="absolute inset-0 h-full w-full"
+                        style={{ border: 0 }}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        allowFullScreen
+                    />
+                ) : (
+                    <div className="text-gray-600 text-sm font-light">Map not available</div>
+                )}
 
                 {/* City badge */}
                 <div className="absolute top-5 left-5 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-[3px] text-(--brand)">
@@ -37,59 +46,67 @@ const LocationCard = ({ item, index }) => {
                 </h3>
 
                 {/* Address */}
-                <div className="flex items-start gap-3 mb-7">
-                    <MapPin
-                        className="w-5 h-5 text-(--brand) shrink-0 mt-1"
-                        strokeWidth={1.75}
-                    />
-                    <div className="text-gray-300 font-light leading-relaxed">
-                        {item.address.map((line, i) => (
-                            <p key={i}>{line}</p>
-                        ))}
+                {addresses.length > 0 && (
+                    <div className="flex items-start gap-3 mb-7">
+                        <MapPin
+                            className="w-5 h-5 text-(--brand) shrink-0 mt-1"
+                            strokeWidth={1.75}
+                        />
+                        <div className="text-gray-300 font-light leading-relaxed">
+                            {addresses.map((line, i) => (
+                                <p key={i}>{line}</p>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Phone numbers */}
-                <div className="space-y-3 mb-8">
-                    {item.contacts.map((contact, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                            <Phone
-                                className="w-4 h-4 text-(--brand) shrink-0"
-                                strokeWidth={2}
-                            />
-                            <div className="flex flex-wrap items-baseline gap-x-2">
-                                <span className="text-gray-500 text-xs uppercase tracking-[2px]">
-                                    {contact.label}
-                                </span>
-                                <a
-                                    href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                                    className="text-white font-medium hover:text-(--brand) transition-colors"
-                                >
-                                    {contact.phone}
-                                </a>
+                {contacts.length > 0 && (
+                    <div className="space-y-3 mb-8">
+                        {contacts.map((contact, i) => (
+                            <div key={i} className="flex items-center gap-3">
+                                <Phone
+                                    className="w-4 h-4 text-(--brand) shrink-0"
+                                    strokeWidth={2}
+                                />
+                                <div className="flex flex-wrap items-baseline gap-x-2">
+                                    <span className="text-gray-500 text-xs uppercase tracking-[2px]">
+                                        {contact.label}
+                                    </span>
+                                    <a
+                                        href={`tel:${(contact?.phone || "").replace(/\s/g, "")}`}
+                                        className="text-white font-medium hover:text-(--brand) transition-colors"
+                                    >
+                                        {contact.phone}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4">
-                    <a
-                        href={`tel:${primaryPhone}`}
-                        className="inline-flex items-center gap-2 bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) px-7 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg shadow-(--brand)/10 hover:shadow-(--brand)/20 hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                        <Phone className="w-4 h-4" strokeWidth={2.5} />
-                        Contact
-                    </a>
-                    <a
-                        href={`https://wa.me/${item.whatsapp}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-white/20 hover:border-(--brand) hover:text-(--brand) text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                        <MessageCircle className="w-4 h-4" strokeWidth={2.5} />
-                        WhatsApp
-                    </a>
+                    {primaryPhone && (
+                        <a
+                            href={`tel:${primaryPhone}`}
+                            className="inline-flex items-center gap-2 bg-(--brand) hover:bg-(--brand-hover) text-(--brand-foreground) px-7 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg shadow-(--brand)/10 hover:shadow-(--brand)/20 hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                            <Phone className="w-4 h-4" strokeWidth={2.5} />
+                            Contact
+                        </a>
+                    )}
+                    {item.whatsapp && (
+                        <a
+                            href={`https://wa.me/${item.whatsapp}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 border border-white/20 hover:border-(--brand) hover:text-(--brand) text-white px-7 py-3.5 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                            <MessageCircle className="w-4 h-4" strokeWidth={2.5} />
+                            WhatsApp
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>

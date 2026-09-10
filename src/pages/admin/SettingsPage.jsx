@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
+import { useToast } from "@/context/ToastContext"
 import { TextField, TextArea, Button, PageHeader } from "./components/FormFields"
 import ImageUpload from "./components/ImageUpload"
 import ColorSwatchField from "./components/ColorSwatchField"
 
 const SettingsPage = () => {
     const { refresh } = useSiteContent()
+    const toast = useToast()
     const [form, setForm] = useState(null)
     const [saving, setSaving] = useState(false)
-    const [message, setMessage] = useState(null)
 
     useEffect(() => {
         api.getSettings().then(setForm)
@@ -21,14 +22,13 @@ const SettingsPage = () => {
 
     const onSave = async () => {
         setSaving(true)
-        setMessage(null)
         try {
             const saved = await api.updateSettings(form)
             setForm(saved)
             await refresh()
-            setMessage("Saved")
+            toast.success("Settings saved")
         } catch (e) {
-            setMessage(e.message || "Save failed")
+            toast.error(e.message || "Failed to save settings")
         } finally {
             setSaving(false)
         }
@@ -70,8 +70,6 @@ const SettingsPage = () => {
                     <TextField label="Copyright Text" value={form.copyrightText} onChange={update("copyrightText")} />
                     <TextField label="Max Reels Allowed" value={form.maxReels} onChange={(v) => update("maxReels")(v === "" ? "" : Number(v))} type="number" />
                 </div>
-
-                {message && <p className="text-(--brand) text-sm">{message}</p>}
             </div>
         </>
     )

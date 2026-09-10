@@ -1,15 +1,20 @@
 import { useState, useRef } from "react"
 import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
+import { useToast } from "@/context/ToastContext"
 import { PageHeader, Button } from "./components/FormFields"
+import ConfirmDialog from "./components/ConfirmDialog"
 import { Trash2, Film, UploadCloud, AlertCircle } from "lucide-react"
 
 const AdminReels = () => {
     const { reels, settings, refresh } = useSiteContent()
+    const toast = useToast()
     const [uploading, setUploading] = useState(false)
     const [title, setTitle] = useState("")
     const [file, setFile] = useState(null)
     const [error, setError] = useState(null)
+    const [deleteId, setDeleteId] = useState(null)
+    const [deleting, setDeleting] = useState(false)
     const fileInputRef = useRef(null)
 
     const maxReels = settings?.maxReels || 10
@@ -32,6 +37,7 @@ const AdminReels = () => {
             setTitle("")
             setFile(null)
             if (fileInputRef.current) fileInputRef.current.value = ""
+            toast.success("Reel uploaded")
         } catch (err) {
             setError(err.message || "Upload failed. Please try again.")
         } finally {
@@ -39,13 +45,19 @@ const AdminReels = () => {
         }
     }
 
-    const handleDelete = async (id) => {
-        if (!confirm("Are you sure you want to delete this reel?")) return
+    const handleConfirmDelete = async () => {
+        if (!deleteId) return
+        setDeleting(true)
         try {
-            await api.deleteAdmin("reels", id)
+            await api.deleteAdmin("reels", deleteId)
             await refresh()
+            setDeleteId(null)
+            toast.success("Reel deleted")
         } catch (err) {
-            alert(err.message || "Failed to delete reel.")
+            setError(err.message || "Failed to delete reel.")
+            toast.error(err.message || "Failed to delete reel")
+        } finally {
+            setDeleting(false)
         }
     }
 
@@ -111,7 +123,7 @@ const AdminReels = () => {
                         <div className="absolute top-0 left-0 w-full p-4 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start opacity-0 group-hover:opacity-100 transition-opacity">
                             <span className="text-sm font-medium text-white drop-shadow-md">{reel.title}</span>
                             <button
-                                onClick={() => handleDelete(reel.id)}
+                                onClick={() => setDeleteId(reel.id)}
                                 className="w-8 h-8 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors backdrop-blur-md"
                                 title="Delete Reel"
                             >
@@ -127,6 +139,17 @@ const AdminReels = () => {
                     </div>
                 )}
             </div>
+
+            <ConfirmDialog
+                open={!!deleteId}
+                onOpenChange={(open) => !open && setDeleteId(null)}
+                title="Delete Reel"
+                description="Are you sure you want to delete this video reel? This action cannot be undone."
+                confirmLabel="Delete"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </div>
     )
 }

@@ -10,7 +10,7 @@ const ContactSection = () => {
     const items = locations.map((l) => ({
         id: l.id,
         city: l.city,
-        image: l.imageUrl,
+        mapEmbedUrl: l.mapEmbedUrl,
         address: (l.address || "").split(/\r?\n/).filter(Boolean),
         contacts: l.contacts || [],
         whatsapp: l.whatsapp

@@ -50,6 +50,66 @@ public class DataSeeder implements CommandLineRunner {
         seedReviews();
         seedLocations();
         seedSocialLinks();
+        cleanupLegacyUploadUrls();
+    }
+
+    private void cleanupLegacyUploadUrls() {
+        try {
+            settingsRepo.findAll().forEach(s -> {
+                boolean changed = false;
+                if (s.getLogoUrl() != null && s.getLogoUrl().contains("/uploads/")) {
+                    s.setLogoUrl(null);
+                    changed = true;
+                }
+                if (s.getFaviconUrl() != null && s.getFaviconUrl().contains("/uploads/")) {
+                    s.setFaviconUrl(null);
+                    changed = true;
+                }
+                if (changed) settingsRepo.save(s);
+            });
+
+            profileRepo.findAll().forEach(p -> {
+                boolean changed = false;
+                if (p.getBeforeImageUrl() != null && p.getBeforeImageUrl().contains("/uploads/")) {
+                    p.setBeforeImageUrl(null);
+                    changed = true;
+                }
+                if (p.getAfterImageUrl() != null && p.getAfterImageUrl().contains("/uploads/")) {
+                    p.setAfterImageUrl(null);
+                    changed = true;
+                }
+                if (changed) profileRepo.save(p);
+            });
+
+            transformationRepo.findAll().forEach(t -> {
+                boolean changed = false;
+                if (t.getBeforeImageUrl() != null && t.getBeforeImageUrl().contains("/uploads/")) {
+                    t.setBeforeImageUrl(null);
+                    changed = true;
+                }
+                if (t.getAfterImageUrl() != null && t.getAfterImageUrl().contains("/uploads/")) {
+                    t.setAfterImageUrl(null);
+                    changed = true;
+                }
+                if (changed) transformationRepo.save(t);
+            });
+
+            locationRepo.findAll().forEach(l -> {
+                if (l.getImageUrl() != null && l.getImageUrl().contains("/uploads/")) {
+                    l.setImageUrl(null);
+                    locationRepo.save(l);
+                }
+            });
+
+            heroRepo.findAll().forEach(h -> {
+                if (h.getImageUrl() != null && h.getImageUrl().contains("/uploads/")) {
+                    h.setImageUrl(null);
+                    heroRepo.save(h);
+                }
+            });
+        } catch (Exception ex) {
+            log.warn("Could not clean up legacy upload URLs: {}", ex.getMessage());
+        }
     }
 
     private void seedAdmin() {
@@ -146,13 +206,13 @@ public class DataSeeder implements CommandLineRunner {
         transformationRepo.saveAll(List.of(
                 Transformation.builder()
                         .title("Classic Patch Restoration")
-                        .beforeImageUrl("/uploads/seed/before-1.jpg")
-                        .afterImageUrl("/uploads/seed/after-1.jpg")
+                        .beforeImageUrl(null)
+                        .afterImageUrl(null)
                         .displayOrder(0).build(),
                 Transformation.builder()
                         .title("Premium Hair Replacement")
-                        .beforeImageUrl("/uploads/seed/before-2.jpg")
-                        .afterImageUrl("/uploads/seed/after-2.jpg")
+                        .beforeImageUrl(null)
+                        .afterImageUrl(null)
                         .displayOrder(1).build()
         ));
     }
@@ -163,20 +223,20 @@ public class DataSeeder implements CommandLineRunner {
                 HairProfile.builder()
                         .title("Crown Area Coverage")
                         .description("Seamless density restoration for thinning crown")
-                        .beforeImageUrl("/uploads/seed/profile-before-1.jpg")
-                        .afterImageUrl("/uploads/seed/profile-after-1.jpg")
+                        .beforeImageUrl(null)
+                        .afterImageUrl(null)
                         .displayOrder(0).build(),
                 HairProfile.builder()
                         .title("Frontal Hairline Definition")
                         .description("Natural-looking front hairline rebuild")
-                        .beforeImageUrl("/uploads/seed/profile-before-2.jpg")
-                        .afterImageUrl("/uploads/seed/profile-after-2.jpg")
+                        .beforeImageUrl(null)
+                        .afterImageUrl(null)
                         .displayOrder(1).build(),
                 HairProfile.builder()
                         .title("Temple Area Blend")
                         .description("Precision fill for receding temples")
-                        .beforeImageUrl("/uploads/seed/profile-before-3.jpg")
-                        .afterImageUrl("/uploads/seed/profile-after-3.jpg")
+                        .beforeImageUrl(null)
+                        .afterImageUrl(null)
                         .displayOrder(2).build()
         ));
     }
@@ -205,7 +265,7 @@ public class DataSeeder implements CommandLineRunner {
         if (locationRepo.count() > 0) return;
         ContactLocation delhi = ContactLocation.builder()
                 .city("Delhi")
-                .imageUrl("/uploads/seed/studio-delhi.jpg")
+                .imageUrl(null)
                 .address("A-2/40, Shop No. 15,\nMain Market, Rajouri Garden,\nNew Delhi — 110027")
                 .whatsapp("918700797103")
                 .displayOrder(0).build();

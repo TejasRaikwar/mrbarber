@@ -17,7 +17,8 @@ const Navbar = () => {
     }, [])
 
     const siteName = settings?.siteName || "MR BARBER"
-    const logoUrl = settings?.logoUrl
+    const [logoError, setLogoError] = useState(false)
+    const logoUrl = !logoError && settings?.logoUrl ? settings.logoUrl : null
 
     return (
         <header
@@ -36,6 +37,7 @@ const Navbar = () => {
                             src={logoUrl}
                             alt={siteName}
                             className="h-8 w-auto object-contain"
+                            onError={() => setLogoError(true)}
                         />
                     ) : (
                         <Scissors className="text-(--brand)" />

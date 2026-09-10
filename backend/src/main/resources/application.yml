@@ -21,8 +21,23 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:acntneww20@gmail.com}
+    password: ${MAIL_PASSWORD:ddipgropjhwfznyu}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 app:
+  mail:
+    from-name: "Mr. Barber"
+    admin-email: ${ADMIN_NOTIFICATION_EMAIL:acntneww20@gmail.com}
   jwt:
     # Base64-encoded secret. Generate one with: openssl rand -base64 64
     secret: ${JWT_SECRET:c3VwZXJzZWNyZXRtcmJhcmJlcmp3dHNpZ25pbmdrZXl0aGF0c2hvdWxkYmVjaGFuZ2VkaW5wcm9k}

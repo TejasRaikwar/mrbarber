@@ -8,7 +8,9 @@ import {
 import { api } from "@/api/client"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useToast } from "@/context/ToastContext"
 import { PageHeader, Button } from "./components/FormFields"
+import ConfirmDialog from "./components/ConfirmDialog"
 
 /* ─── Utilities ─────────────────────────────────────────────────────────── */
 const calcAge = (dobStr) => {
@@ -230,6 +232,7 @@ const StaffForm = ({ form, set, isEdit }) => {
 /* ─── Create / Edit Dialog ──────────────────────────────────────────────── */
 const StaffDialog = ({ staff = null, onSaved, trigger }) => {
     const isEdit = !!staff
+    const toast = useToast()
     const [open, setOpen] = useState(false)
     const [form, setForm] = useState(EMPTY)
     const [saving, setSaving] = useState(false)
@@ -272,6 +275,7 @@ const StaffDialog = ({ staff = null, onSaved, trigger }) => {
                 : await api.createStaff(payload)
             onSaved(saved, isEdit)
             setOpen(false)
+            toast.success(isEdit ? "Staff member updated" : "Staff member added")
         } catch (err) {
             setError(err.message || "Failed to save staff.")
         } finally {
@@ -392,8 +396,11 @@ const Info = ({ icon, label, value, accent, wide }) => (
 
 /* ─── Page ──────────────────────────────────────────────────────────────── */
 const StaffPage = () => {
+    const toast = useToast()
     const [staff, setStaff] = useState([])
     const [loading, setLoading] = useState(true)
+    const [deleteId, setDeleteId] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     useEffect(() => {
         api.listStaff().then((data) => { setStaff(data); setLoading(false) })
@@ -405,10 +412,19 @@ const StaffPage = () => {
         )
     }
 
-    const handleDelete = async (id) => {
-        if (!confirm("Remove this staff member? They won't be able to login anymore.")) return
-        await api.deleteStaff(id)
-        setStaff((prev) => prev.filter((s) => s.id !== id))
+    const handleConfirmDelete = async () => {
+        if (!deleteId) return
+        setDeleting(true)
+        try {
+            await api.deleteStaff(deleteId)
+            setStaff((prev) => prev.filter((s) => s.id !== deleteId))
+            setDeleteId(null)
+            toast.success("Staff member removed")
+        } catch (err) {
+            toast.error(err.message || "Failed to remove staff member")
+        } finally {
+            setDeleting(false)
+        }
     }
 
     return (
@@ -445,10 +461,21 @@ const StaffPage = () => {
             ) : (
                 <div className="space-y-4">
                     {staff.map((s) => (
-                        <StaffCard key={s.id} s={s} onUpdated={(u) => handleSaved(u, true)} onDelete={handleDelete} />
+                        <StaffCard key={s.id} s={s} onUpdated={(u) => handleSaved(u, true)} onDelete={(id) => setDeleteId(id)} />
                     ))}
                 </div>
             )}
+
+            <ConfirmDialog
+                open={!!deleteId}
+                onOpenChange={(open) => !open && setDeleteId(null)}
+                title="Remove Staff Member"
+                description="Are you sure you want to remove this staff account? They will no longer be able to log in."
+                confirmLabel="Remove"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </>
     )
 }

@@ -9,7 +9,9 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
+import { useToast } from "@/context/ToastContext"
 import { PageHeader, Button } from "./components/FormFields"
+import ConfirmDialog from "./components/ConfirmDialog"
 
 const EXTRA_SERVICES = ["Maintenance"]
 const CUSTOM_KEY = "__custom__"
@@ -230,6 +232,7 @@ const ApptFormFields = ({ form, set, serviceOptions }) => (
 /* ─── Dialog ─────────────────────────────────────────────────────────────── */
 const AppointmentDialog = ({ appointment = null, serviceOptions, onSaved, trigger }) => {
     const isEdit = !!appointment
+    const toast = useToast()
     const [open, setOpen] = useState(false)
     const [form, setForm] = useState(defaultForm)
     const [saving, setSaving] = useState(false)
@@ -261,6 +264,7 @@ const AppointmentDialog = ({ appointment = null, serviceOptions, onSaved, trigge
                 : await api.createAppointment(payload)
             onSaved(saved, isEdit)
             setOpen(false)
+            toast.success(isEdit ? "Appointment updated" : "Appointment created")
         } catch { setError("Failed to save. Please try again.") }
         finally { setSaving(false) }
     }
@@ -348,8 +352,11 @@ const ApptCard = ({ appt, serviceOptions, onUpdated, onDelete }) => (
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 const AppointmentPage = () => {
     const { services } = useSiteContent()
+    const toast = useToast()
     const [all, setAll] = useState([])
     const [filter, setFilter] = useState("month")
+    const [deleteId, setDeleteId] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     const serviceOptions = [...(services || []).map((s) => s.title), ...EXTRA_SERVICES]
 
@@ -359,10 +366,19 @@ const AppointmentPage = () => {
         setAll((prev) => isEdit ? prev.map((a) => (a.id === saved.id ? saved : a)) : [saved, ...prev])
     }
 
-    const handleDelete = async (id) => {
-        if (!confirm("Delete this appointment?")) return
-        await api.deleteAppointment(id)
-        setAll((prev) => prev.filter((a) => a.id !== id))
+    const handleConfirmDelete = async () => {
+        if (!deleteId) return
+        setDeleting(true)
+        try {
+            await api.deleteAppointment(deleteId)
+            setAll((prev) => prev.filter((a) => a.id !== deleteId))
+            setDeleteId(null)
+            toast.success("Appointment deleted")
+        } catch (err) {
+            toast.error(err.message || "Failed to delete appointment")
+        } finally {
+            setDeleting(false)
+        }
     }
 
     // Filter by appointmentDate, sort newest-date first, then earliest-time-first within a day
@@ -450,13 +466,24 @@ const AppointmentPage = () => {
                                 {group.items.map((a) => (
                                     <ApptCard key={a.id} appt={a} serviceOptions={serviceOptions}
                                         onUpdated={(u) => handleSaved(u, true)}
-                                        onDelete={handleDelete} />
+                                        onDelete={(id) => setDeleteId(id)} />
                                 ))}
                             </div>
                         </div>
                     ))}
                 </div>
             )}
+
+            <ConfirmDialog
+                open={!!deleteId}
+                onOpenChange={(open) => !open && setDeleteId(null)}
+                title="Delete Appointment"
+                description="Are you sure you want to delete this appointment? This action cannot be undone."
+                confirmLabel="Delete"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </>
     )
 }

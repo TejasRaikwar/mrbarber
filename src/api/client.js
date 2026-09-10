@@ -53,7 +53,42 @@ export const api = {
         }),
 
     // Public bulk fetch
-    getSite: () => request("/api/public/site"),
+    getSite: async () => {
+        const site = await request("/api/public/site")
+        if (!site) return site
+        const clean = (u) => (u && (u.startsWith("/uploads/") || u.includes(":8081/uploads/")) ? null : u)
+        if (site.settings) {
+            site.settings.logoUrl = clean(site.settings.logoUrl)
+            site.settings.faviconUrl = clean(site.settings.faviconUrl)
+        }
+        if (Array.isArray(site.hairProfiles)) {
+            site.hairProfiles = site.hairProfiles.map(p => ({
+                ...p,
+                beforeImageUrl: clean(p.beforeImageUrl),
+                afterImageUrl: clean(p.afterImageUrl)
+            }))
+        }
+        if (Array.isArray(site.transformations)) {
+            site.transformations = site.transformations.map(t => ({
+                ...t,
+                beforeImageUrl: clean(t.beforeImageUrl),
+                afterImageUrl: clean(t.afterImageUrl)
+            }))
+        }
+        if (Array.isArray(site.locations)) {
+            site.locations = site.locations.map(l => ({
+                ...l,
+                imageUrl: clean(l.imageUrl)
+            }))
+        }
+        if (Array.isArray(site.heroSlides)) {
+            site.heroSlides = site.heroSlides.map(h => ({
+                ...h,
+                imageUrl: clean(h.imageUrl)
+            }))
+        }
+        return site
+    },
 
     // Admin — generic CRUD helpers per resource
     listAdmin: (resource) => request(`/api/admin/${resource}`),

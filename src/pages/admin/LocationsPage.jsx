@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { Plus, Trash2, X } from "lucide-react"
 import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
+import { useToast } from "@/context/ToastContext"
+import { extractMapEmbedSrc } from "@/lib/utils"
 import { TextField, NumberField, TextArea, Button, PageHeader } from "./components/FormFields"
-import ImageUpload from "./components/ImageUpload"
+import ConfirmDialog from "./components/ConfirmDialog"
 
 const blankLocation = () => ({
     city: "",
-    imageUrl: "",
+    mapEmbedUrl: "",
     address: "",
     whatsapp: "",
     contacts: [],
@@ -20,8 +22,11 @@ const blankContact = () => ({ label: "", phone: "", _tempId: Date.now() + Math.r
 
 const LocationsPage = () => {
     const { refresh } = useSiteContent()
+    const toast = useToast()
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
+    const [deleteIdx, setDeleteIdx] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     const load = async () => {
         setLoading(true)
@@ -60,23 +65,40 @@ const LocationsPage = () => {
         const item = items[idx]
         const payload = {
             ...item,
+            mapEmbedUrl: extractMapEmbedSrc(item.mapEmbedUrl),
             contacts: (item.contacts || []).map((c) => ({ label: c.label, phone: c.phone, id: c.id }))
         }
         delete payload._draft
         delete payload._tempId
-        const saved = item.id
-            ? await api.updateAdmin("locations", item.id, payload)
-            : await api.createAdmin("locations", payload)
-        setItems((prev) => prev.map((it, i) => (i === idx ? saved : it)))
-        await refresh()
+        const isEdit = !!item.id
+        try {
+            const saved = isEdit
+                ? await api.updateAdmin("locations", item.id, payload)
+                : await api.createAdmin("locations", payload)
+            setItems((prev) => prev.map((it, i) => (i === idx ? saved : it)))
+            await refresh()
+            toast.success(isEdit ? "Location saved" : "Location created")
+        } catch (err) {
+            toast.error(err.message || "Failed to save location")
+            throw err
+        }
     }
 
-    const onDelete = async (idx) => {
-        const item = items[idx]
-        if (!confirm("Delete this location?")) return
-        if (item.id) await api.deleteAdmin("locations", item.id)
-        setItems((prev) => prev.filter((_, i) => i !== idx))
-        await refresh()
+    const handleConfirmDelete = async () => {
+        if (deleteIdx === null) return
+        const item = items[deleteIdx]
+        setDeleting(true)
+        try {
+            if (item?.id) await api.deleteAdmin("locations", item.id)
+            setItems((prev) => prev.filter((_, i) => i !== deleteIdx))
+            setDeleteIdx(null)
+            await refresh()
+            toast.success("Location deleted")
+        } catch (err) {
+            toast.error(err.message || "Failed to delete location")
+        } finally {
+            setDeleting(false)
+        }
     }
 
     return (
@@ -108,11 +130,22 @@ const LocationsPage = () => {
                             addContact={() => addContact(idx)}
                             removeContact={(cIdx) => removeContact(idx, cIdx)}
                             onSave={() => onSave(idx)}
-                            onDelete={() => onDelete(idx)}
+                            onDelete={() => setDeleteIdx(idx)}
                         />
                     ))}
                 </div>
             )}
+
+            <ConfirmDialog
+                open={deleteIdx !== null}
+                onOpenChange={(open) => !open && setDeleteIdx(null)}
+                title="Delete Location"
+                description="Are you sure you want to delete this location? It will be removed from the public website."
+                confirmLabel="Delete"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </>
     )
 }
@@ -122,7 +155,7 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
 
     const doSave = async () => {
         setSaving(true)
-        try { await onSave() } finally { setSaving(false) }
+        try { await onSave() } catch { /* error already surfaced via toast */ } finally { setSaving(false) }
     }
 
     return (
@@ -131,7 +164,16 @@ const LocationEditor = ({ loc, onChange, updateContact, addContact, removeContac
                 <TextField label="City" value={loc.city} onChange={(v) => onChange({ city: v })} required />
                 <TextField label="WhatsApp (digits, with country code)" value={loc.whatsapp} onChange={(v) => onChange({ whatsapp: v })} />
                 <div className="md:col-span-2">
-                    <ImageUpload label="Studio image" value={loc.imageUrl} onChange={(v) => onChange({ imageUrl: v })} />
+                    <TextArea
+                        label="Map embed URL"
+                        value={loc.mapEmbedUrl}
+                        onChange={(v) => onChange({ mapEmbedUrl: v })}
+                        rows={2}
+                        placeholder="Paste the Google Maps 'Embed a map' link (or the whole <iframe> snippet)"
+                    />
+                    <p className="text-xs text-gray-500 mt-1.5">
+                        In Google Maps: search the location → Share → Embed a map → Copy HTML, then paste it here (the iframe src is extracted automatically).
+                    </p>
                 </div>
                 <div className="md:col-span-2">
                     <TextArea label="Address (one line per row)" value={loc.address} onChange={(v) => onChange({ address: v })} rows={3} />

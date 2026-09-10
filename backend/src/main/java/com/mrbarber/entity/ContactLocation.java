@@ -24,6 +24,10 @@ public class ContactLocation {
 
     private String imageUrl;
 
+    /** Google Maps "Embed a map" iframe src URL shown on the Visit Us card. */
+    @Column(columnDefinition = "TEXT")
+    private String mapEmbedUrl;
+
     /** Multi-line address (joined with newline). */
     @Column(columnDefinition = "TEXT")
     private String address;

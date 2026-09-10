@@ -2,11 +2,13 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { api } from "@/api/client"
 import { useAuth } from "@/context/AuthContext"
+import { useToast } from "@/context/ToastContext"
 import { TextField, Button, PageHeader } from "./components/FormFields"
 
 const ChangePasswordPage = () => {
     const { logout } = useAuth()
     const navigate = useNavigate()
+    const toast = useToast()
 
     const [current, setCurrent] = useState("")
     const [next, setNext] = useState("")
@@ -33,12 +35,14 @@ const ChangePasswordPage = () => {
         try {
             await api.changePassword(current, next)
             setInfo("Password changed. Signing you out…")
+            toast.success("Password changed")
             setTimeout(() => {
                 logout()
                 navigate("/admin/login", { replace: true })
             }, 1500)
         } catch (err) {
             setError(err.message || "Could not change password")
+            toast.error(err.message || "Could not change password")
         } finally {
             setSubmitting(false)
         }

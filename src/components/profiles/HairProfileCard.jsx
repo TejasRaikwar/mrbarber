@@ -26,9 +26,10 @@ const HairProfileCard = ({ item, index }) => {
                             alt=""
                             className="h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-105"
                             draggable={false}
+                            onError={(e) => { e.currentTarget.style.display = "none" }}
                         />
                     ) : (
-                        <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-700 text-sm">No image</div>
+                        <div className="h-full w-full bg-zinc-900 flex items-center justify-center text-gray-600 text-sm font-light">No image uploaded</div>
                     )}
 
                     {/* Dim overlay for readability */}
@@ -48,9 +49,10 @@ const HairProfileCard = ({ item, index }) => {
                             alt=""
                             className="h-full w-full object-cover select-none"
                             draggable={false}
+                            onError={(e) => { e.currentTarget.style.display = "none" }}
                         />
                     ) : (
-                        <div className="h-full w-full bg-zinc-800 flex items-center justify-center text-gray-600 text-xs">No image</div>
+                        <div className="h-full w-full bg-zinc-800 flex items-center justify-center text-gray-600 text-xs font-light">No image</div>
                     )}
                     {/* After label */}
                     <div className="absolute left-2 top-2 bg-(--brand) text-(--brand-foreground) px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">

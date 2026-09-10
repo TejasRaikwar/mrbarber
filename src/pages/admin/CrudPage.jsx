@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { Plus, Trash2 } from "lucide-react"
 import { api } from "@/api/client"
 import { useSiteContent } from "@/context/SiteContentContext"
+import { useToast } from "@/context/ToastContext"
 import { TextField, NumberField, TextArea, Button, PageHeader } from "./components/FormFields"
 import ImageUpload from "./components/ImageUpload"
+import ConfirmDialog from "./components/ConfirmDialog"
 
 /**
  * Generic CRUD page driven by a schema describing each editable field.
@@ -19,8 +21,11 @@ import ImageUpload from "./components/ImageUpload"
  */
 const CrudPage = ({ schema }) => {
     const { refresh, navLinks } = useSiteContent()
+    const toast = useToast()
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
+    const [deleteIdx, setDeleteIdx] = useState(null)
+    const [deleting, setDeleting] = useState(false)
 
     const load = async () => {
         setLoading(true)
@@ -49,21 +54,37 @@ const CrudPage = ({ schema }) => {
         const payload = { ...item }
         delete payload._draft
         delete payload._tempId
-        const saved = item.id
-            ? await api.updateAdmin(schema.resource, item.id, payload)
-            : await api.createAdmin(schema.resource, payload)
-        setItems((prev) => prev.map((it, i) => (i === idx ? saved : it)))
-        await refresh()
+        const isEdit = !!item.id
+        try {
+            const saved = isEdit
+                ? await api.updateAdmin(schema.resource, item.id, payload)
+                : await api.createAdmin(schema.resource, payload)
+            setItems((prev) => prev.map((it, i) => (i === idx ? saved : it)))
+            await refresh()
+            toast.success(isEdit ? "Changes saved" : "Item created")
+        } catch (err) {
+            toast.error(err.message || "Failed to save")
+            throw err
+        }
     }
 
-    const onDelete = async (idx) => {
-        const item = items[idx]
-        if (!confirm("Delete this item?")) return
-        if (item.id) {
-            await api.deleteAdmin(schema.resource, item.id)
+    const handleConfirmDelete = async () => {
+        if (deleteIdx === null) return
+        const item = items[deleteIdx]
+        setDeleting(true)
+        try {
+            if (item?.id) {
+                await api.deleteAdmin(schema.resource, item.id)
+            }
+            setItems((prev) => prev.filter((_, i) => i !== deleteIdx))
+            setDeleteIdx(null)
+            await refresh()
+            toast.success("Item deleted")
+        } catch (err) {
+            toast.error(err.message || "Failed to delete")
+        } finally {
+            setDeleting(false)
         }
-        setItems((prev) => prev.filter((_, i) => i !== idx))
-        await refresh()
     }
 
     return (
@@ -95,11 +116,22 @@ const CrudPage = ({ schema }) => {
                             navLinks={navLinks}
                             onChange={(key, value) => onChange(idx, key, value)}
                             onSave={() => onSave(idx)}
-                            onDelete={() => onDelete(idx)}
+                            onDelete={() => setDeleteIdx(idx)}
                         />
                     ))}
                 </div>
             )}
+
+            <ConfirmDialog
+                open={deleteIdx !== null}
+                onOpenChange={(open) => !open && setDeleteIdx(null)}
+                title="Delete Item"
+                description="Are you sure you want to delete this item? This action cannot be undone."
+                confirmLabel="Delete"
+                variant="danger"
+                loading={deleting}
+                onConfirm={handleConfirmDelete}
+            />
         </>
     )
 }
@@ -113,6 +145,8 @@ const ItemEditor = ({ schema, item, navLinks, onChange, onSave, onDelete }) => {
         try {
             await onSave()
             setSavedAt(Date.now())
+        } catch {
+            // error already surfaced via toast
         } finally {
             setSaving(false)
         }
