@@ -1,0 +1,49 @@
+/* Horizontal rail of reel cards on the home page. */
+.reels-rail {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 1.5rem;
+    padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.reels-rail__item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+
+/* Vertical shorts-style track inside the viewer. */
+.reels-viewer__track {
+    height: 100%;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+}
+
+.reels-viewer__slide {
+    height: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+/* Both scrollers are driven by their own controls, so hide the native bars. */
+.reels-rail,
+.reels-viewer__track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.reels-rail::-webkit-scrollbar,
+.reels-viewer__track::-webkit-scrollbar {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reels-rail,
+    .reels-viewer__track {
+        scroll-behavior: auto;
+    }
+}
