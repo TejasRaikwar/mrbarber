@@ -49,7 +49,7 @@ const Navbar = () => {
                             className={overHero ? "text-(--media-foreground)" : "text-(--brand)"}
                         />
                     )}
-                    <h1
+                    <span
                         className={`text-2xl font-bold tracking-wide transition-colors duration-300 ${
                             overHero
                                 ? "text-(--media-foreground) drop-shadow-md"
@@ -57,7 +57,7 @@ const Navbar = () => {
                         }`}
                     >
                         {siteName}
-                    </h1>
+                    </span>
                 </a>
 
                 <Navlinks overHero={overHero} />

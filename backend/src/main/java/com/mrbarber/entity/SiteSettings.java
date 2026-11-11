@@ -27,6 +27,14 @@ public class SiteSettings {
     /** Browser tab title. */
     private String pageTitle;
 
+    /** Search-result snippet for the home page (blank = built-in default). */
+    @Column(columnDefinition = "TEXT")
+    private String metaDescription;
+
+    /** Image shown when the site is shared on WhatsApp/Facebook/X (blank = built-in default). */
+    @Column(length = 1000)
+    private String ogImageUrl;
+
     /** URL of favicon image (uploaded). */
     private String faviconUrl;
 

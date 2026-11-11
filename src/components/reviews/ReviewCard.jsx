@@ -37,6 +37,8 @@ const ReviewCard = ({ item, index }) => {
                     <img
                         src={item.avatarUrl}
                         alt={item.name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-11 h-11 rounded-full object-cover shrink-0 shadow-lg"
                     />
                 ) : (

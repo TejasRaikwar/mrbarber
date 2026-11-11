@@ -21,7 +21,7 @@ const ContactSection = () => {
             <div className="max-w-7xl mx-auto px-6 relative">
                 <SectionHeading
                     eyebrow="Get In Touch"
-                    title="Visit Our Studio"
+                    title="Visit Our Hair Patch Studios in Nagpur"
                     description="Drop by for a consultation or book a home trial — our experts are ready to craft the right look for you."
                 />
 

@@ -56,7 +56,9 @@ const BeforeAfterCard = ({ item }) => {
           {item.after ? (
             <img
               src={item.after}
-              alt=""
+              alt={`${item.title || "Hair patch"} – after, Mr Barber Nagpur`}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover select-none pointer-events-none"
               onError={(e) => { e.currentTarget.style.display = "none" }}
             />
@@ -79,7 +81,9 @@ const BeforeAfterCard = ({ item }) => {
           {item.before ? (
             <img
               src={item.before}
-              alt=""
+              alt={`${item.title || "Hair loss"} – before, Mr Barber Nagpur`}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover select-none pointer-events-none"
               onError={(e) => { e.currentTarget.style.display = "none" }}
             />

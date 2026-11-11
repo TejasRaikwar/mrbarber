@@ -23,7 +23,9 @@ const HairProfileCard = ({ item, index }) => {
                     {item.before ? (
                         <img
                             src={item.before}
-                            alt=""
+                            alt={`${item.title || "Hair profile"} – before`}
+                            loading="lazy"
+                            decoding="async"
                             className="h-full w-full object-cover select-none transition-transform duration-700 group-hover:scale-105"
                             draggable={false}
                             onError={(e) => { e.currentTarget.style.display = "none" }}
@@ -46,7 +48,9 @@ const HairProfileCard = ({ item, index }) => {
                     {item.after ? (
                         <img
                             src={item.after}
-                            alt=""
+                            alt={`${item.title || "Hair profile"} – after hair patch`}
+                            loading="lazy"
+                            decoding="async"
                             className="h-full w-full object-cover select-none"
                             draggable={false}
                             onError={(e) => { e.currentTarget.style.display = "none" }}

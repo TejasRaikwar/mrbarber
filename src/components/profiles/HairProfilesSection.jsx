@@ -19,7 +19,7 @@ const HairProfilesSection = () => {
             <div className="max-w-7xl mx-auto px-6">
                 <SectionHeading
                     eyebrow="Hair Profiles"
-                    title="Application for Different Hair Profiles"
+                    title="Hair Patch for Every Hair Loss Pattern"
                     description="Tailored solutions for every concern — from crown thinning to receding temples, see how each profile transforms."
                 />
 

@@ -127,7 +127,35 @@ const SettingsPage = () => {
                     </div>
                 </div>
 
-                <TextField label="Browser Tab Title" value={form.pageTitle} onChange={update("pageTitle")} />
+                {/* ── Search & sharing ─────────────────────────────────── */}
+                <div className="rounded-2xl border border-border bg-card p-6">
+                    <h2 className="text-lg font-bold mb-1">Search &amp; Sharing (SEO)</h2>
+                    <p className="text-muted-foreground text-sm mb-5">
+                        How the home page appears in Google results and in link previews on
+                        WhatsApp, Facebook and X. Leave a field blank to use the built-in
+                        default. Service and branch pages have their own fixed text.
+                    </p>
+                    <div className="space-y-5">
+                        <TextField
+                            label="Home Page Title"
+                            value={form.pageTitle}
+                            onChange={update("pageTitle")}
+                            placeholder="Mr barber Hair Patch in Nagpur"
+                        />
+                        <div>
+                            <TextArea
+                                label="Meta Description"
+                                value={form.metaDescription}
+                                onChange={update("metaDescription")}
+                                rows={3}
+                            />
+                            <p className={`text-xs mt-1.5 ${(form.metaDescription || "").length > 160 ? "text-destructive" : "text-muted-foreground"}`}>
+                                {(form.metaDescription || "").length}/160 characters — Google usually cuts off longer text.
+                            </p>
+                        </div>
+                        <ImageUpload label="Share Image (1200×630 works best)" value={form.ogImageUrl} onChange={update("ogImageUrl")} />
+                    </div>
+                </div>
 
                 <TextArea label="Footer Description" value={form.footerDescription} onChange={update("footerDescription")} rows={3} />
 

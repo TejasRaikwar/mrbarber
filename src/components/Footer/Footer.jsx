@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Scissors, Mail, Phone, MapPin } from "lucide-react"
 import { Link } from "react-router-dom"
+import { SERVICES, BRANCHES, servicePath, branchPath } from "@/seo/siteSeo"
 import { useSectionNav } from "@/components/Navbar/useSectionNav"
 import { useSiteContent } from "@/context/SiteContentContext"
 import { Instagram, Facebook, Youtube } from "@/components/ui/icons"
@@ -13,7 +14,7 @@ const SOCIAL_ICON_MAP = {
 
 const Footer = () => {
     const { handleNavClick } = useSectionNav()
-    const { settings, navLinks, services, socialLinks } = useSiteContent()
+    const { settings, navLinks, socialLinks } = useSiteContent()
 
     const siteName = settings?.siteName || "MR BARBER"
     const [logoError, setLogoError] = useState(false)
@@ -46,9 +47,9 @@ const Footer = () => {
                             ) : (
                                 <Scissors className="text-(--brand) w-6 h-6" />
                             )}
-                            <h2 className="text-2xl font-bold text-foreground tracking-wide">
+                            <p className="text-2xl font-bold text-foreground tracking-wide">
                                 {siteName}
-                            </h2>
+                            </p>
                         </div>
                         <p className="text-muted-foreground text-sm leading-relaxed font-light mb-6">
                             {description}
@@ -99,15 +100,14 @@ const Footer = () => {
                             Services
                         </h3>
                         <ul className="space-y-3">
-                            {(services || []).map((s) => (
-                                <li key={s.id}>
-                                    <a
-                                        href="/#services"
-                                        onClick={(e) => handleNavClick(e, "services")}
+                            {SERVICES.map((s) => (
+                                <li key={s.slug}>
+                                    <Link
+                                        to={servicePath(s)}
                                         className="text-muted-foreground hover:text-(--brand) text-sm transition-colors cursor-pointer"
                                     >
-                                        {s.title}
-                                    </a>
+                                        {s.name} in Nagpur
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -136,6 +136,17 @@ const Footer = () => {
                                     </a>
                                 </li>
                             )}
+                            {BRANCHES.map((b) => (
+                                <li key={b.slug} className="flex items-start gap-3 text-sm">
+                                    <MapPin className="w-4 h-4 text-(--brand) shrink-0 mt-0.5" strokeWidth={1.75} />
+                                    <Link
+                                        to={branchPath(b)}
+                                        className="text-muted-foreground hover:text-(--brand) transition-colors font-light"
+                                    >
+                                        Mr Barber {b.area}
+                                    </Link>
+                                </li>
+                            ))}
                             {email && (
                                 <li className="flex items-center gap-3 text-sm">
                                     <Mail className="w-4 h-4 text-(--brand) shrink-0" strokeWidth={2} />

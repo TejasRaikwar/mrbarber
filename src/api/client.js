@@ -62,6 +62,7 @@ export const api = {
         if (site.settings) {
             site.settings.logoUrl = clean(site.settings.logoUrl)
             site.settings.faviconUrl = clean(site.settings.faviconUrl)
+            site.settings.ogImageUrl = clean(site.settings.ogImageUrl)
         }
         if (Array.isArray(site.hairProfiles)) {
             site.hairProfiles = site.hairProfiles.map(p => ({

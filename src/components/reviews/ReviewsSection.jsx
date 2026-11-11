@@ -29,7 +29,7 @@ const ReviewsSection = () => {
             <div className="max-w-7xl mx-auto px-6 relative">
                 <SectionHeading
                     eyebrow="Testimonials"
-                    title="What Our Customers Say"
+                    title="Mr Barber Reviews from Nagpur Clients"
                     description={
                         <p className="text-muted-foreground max-w-2xl mx-auto">
                             Real stories from men who&apos;ve transformed their look —

@@ -81,6 +81,16 @@ const ServiceCard = ({ item, index }) => {
             >
                 {item.description}
             </p>
+
+            {item.to && (
+                <span
+                    className="mt-auto pt-5 text-sm font-semibold text-(--brand) inline-flex items-center gap-1.5"
+                    style={{ transform: "translateZ(10px)" }}
+                >
+                    Learn more
+                    <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+            )}
         </motion.div>
     )
 }

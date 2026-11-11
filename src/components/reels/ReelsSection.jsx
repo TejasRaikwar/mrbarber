@@ -48,7 +48,7 @@ const ReelsSection = () => {
                 <div className="px-6">
                     <SectionHeading
                         eyebrow="Our Craft in Motion"
-                        title="Latest Reels"
+                        title="Hair Patch Transformation Reels"
                         description="Watch our master barbers at work and get inspired for your next look."
                     />
                 </div>

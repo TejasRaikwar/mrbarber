@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+Disallow: /staff
+
+Sitemap: https://mrbarberhairpatch.com/sitemap.xml

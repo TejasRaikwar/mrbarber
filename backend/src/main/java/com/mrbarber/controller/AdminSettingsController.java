@@ -26,6 +26,8 @@ public class AdminSettingsController {
         existing.setSiteName(body.getSiteName());
         existing.setSiteTagline(body.getSiteTagline());
         existing.setPageTitle(body.getPageTitle());
+        existing.setMetaDescription(body.getMetaDescription());
+        existing.setOgImageUrl(body.getOgImageUrl());
         existing.setFaviconUrl(body.getFaviconUrl());
         existing.setLogoUrl(body.getLogoUrl());
         existing.setFooterDescription(body.getFooterDescription());

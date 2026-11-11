@@ -4,7 +4,7 @@ import { getContrastForeground } from "./colorContrast"
 const DEFAULT_BRAND = "#8b5e3c"
 
 /**
- * Keep <title>, the tab favicon, and the admin-configured brand color in sync
+ * Keep the tab favicon and the admin-configured brand color in sync
  * with site settings. Falls back to the existing index.html/CSS values if a
  * field is empty.
  *
@@ -17,10 +17,7 @@ export const useDocumentMeta = (settings) => {
     useEffect(() => {
         if (!settings) return
 
-        const title = settings.pageTitle || settings.siteName
-        if (title) {
-            document.title = title
-        }
+        // The page title is owned by useSeo (per route) — see src/lib/useSeo.js.
 
         if (settings.faviconUrl) {
             let link = document.querySelector("link[rel~='icon']")
