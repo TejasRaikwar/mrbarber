@@ -5,10 +5,17 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:mrbarber}?createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=${DB_USE_SSL:false}&sslMode=${DB_SSL_MODE:PREFERRED}&enabledTLSProtocols=TLSv1.2,TLSv1.3
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:160702}
+    url: jdbc:mysql://${DB_HOST:gateway01.ap-northeast-1.prod.aws.tidbcloud.com}:${DB_PORT:4000}/${DB_NAME:mrbarber}?createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=${DB_USE_SSL:true}&sslMode=${DB_SSL_MODE:PREFERRED}&enabledTLSProtocols=TLSv1.2,TLSv1.3
+    username: ${DB_USER:JuZU84EjzPLeqvN.root}
+    password: ${DB_PASSWORD:HCYB1lQRtvkWf6h7}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # TiDB Cloud Serverless's proxy drops idle connections well before HikariCP's
+      # own defaults would recycle them; retiring pooled connections proactively
+      # avoids requests silently eating a "failed to validate, reconnecting" retry.
+      max-lifetime: 180000
+      connection-timeout: 20000
+      validation-timeout: 5000
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,8 +31,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME:acntneww20@gmail.com}
-    password: ${MAIL_PASSWORD:ddipgropjhwfznyu}
+    username: ${MAIL_USERNAME:mrbarberhairpatch@gmail.com}
+    password: ${MAIL_PASSWORD:kzxkasuughhhsqnw}
     properties:
       mail:
         smtp:
@@ -37,18 +44,18 @@ spring:
 app:
   mail:
     from-name: "Mr. Barber"
-    admin-email: ${ADMIN_NOTIFICATION_EMAIL:acntneww20@gmail.com}
+    admin-email: ${ADMIN_NOTIFICATION_EMAIL:mrbarberhairpatch@gmail.com}
   jwt:
     # Base64-encoded secret. Generate one with: openssl rand -base64 64
     secret: ${JWT_SECRET:c3VwZXJzZWNyZXRtcmJhcmJlcmp3dHNpZ25pbmdrZXl0aGF0c2hvdWxkYmVjaGFuZ2VkaW5wcm9k}
     expiration-ms: 86400000  # 24h
   cloudinary:
-    url: ${CLOUDINARY_URL:cloudinary://725234339843327:L-FSuwgmlaPG9p3CpxBGI1vCvw4@dfycl4q5v}
+    url: ${CLOUDINARY_URL:cloudinary://541476221226144:0tBGbXx3ngw0spD09V-X-mAz4mM@d7ubx6d2}
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:4173}
   seed:
-    admin-username: ${ADMIN_USERNAME:admin}
-    admin-password: ${ADMIN_PASSWORD:admin123}
+    admin-username: ${ADMIN_USERNAME:mrbarberadmin}
+    admin-password: ${ADMIN_PASSWORD:Barber123@}
 
 logging:
   level:

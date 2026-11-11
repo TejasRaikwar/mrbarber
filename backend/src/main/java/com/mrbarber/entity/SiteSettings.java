@@ -59,4 +59,22 @@ public class SiteSettings {
      */
     @Builder.Default
     private String themeId = "beige";
+
+    // ─── Enquiry email templates (blank = built-in default) ───────────────
+    // Placeholders supported in all four fields: {{customerName}}, {{brandName}},
+    // {{email}}, {{phone}}, {{address}}.
+
+    /** Subject of the confirmation email sent to the person who submitted the enquiry. */
+    private String enquiryCustomerSubject;
+
+    /** Intro message shown in that confirmation email, above the submitted-details block. */
+    @Column(columnDefinition = "TEXT")
+    private String enquiryCustomerMessage;
+
+    /** Subject of the alert email sent to the salon/admin. */
+    private String enquiryAdminSubject;
+
+    /** Intro line shown under the heading in the admin alert email. */
+    @Column(columnDefinition = "TEXT")
+    private String enquiryAdminIntro;
 }

@@ -2,7 +2,9 @@ package com.mrbarber.controller;
 
 import com.mrbarber.dto.AuthDtos.AuthResponse;
 import com.mrbarber.dto.AuthDtos.ChangePasswordRequest;
+import com.mrbarber.dto.AuthDtos.LoginChallengeResponse;
 import com.mrbarber.dto.AuthDtos.LoginRequest;
+import com.mrbarber.dto.AuthDtos.OtpVerifyRequest;
 import com.mrbarber.dto.AuthDtos.UserInfo;
 import com.mrbarber.service.AuthService;
 import jakarta.validation.Valid;
@@ -20,8 +22,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest req) {
+    public ResponseEntity<LoginChallengeResponse> login(@Valid @RequestBody LoginRequest req) {
         return ResponseEntity.ok(authService.login(req));
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<AuthResponse> verifyOtp(@Valid @RequestBody OtpVerifyRequest req) {
+        return ResponseEntity.ok(authService.verifyOtp(req));
     }
 
     @GetMapping("/me")

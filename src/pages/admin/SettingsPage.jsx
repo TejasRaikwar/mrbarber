@@ -142,6 +142,63 @@ const SettingsPage = () => {
                     <TextField label="Copyright Text" value={form.copyrightText} onChange={update("copyrightText")} />
                     <TextField label="Max Reels Allowed" value={form.maxReels} onChange={(v) => update("maxReels")(v === "" ? "" : Number(v))} type="number" />
                 </div>
+
+                {/* ── Enquiry emails ──────────────────────────────────── */}
+                <div className="rounded-2xl border border-border bg-card p-6">
+                    <h2 className="text-lg font-bold mb-1">Enquiry Emails</h2>
+                    <p className="text-muted-foreground text-sm mb-5">
+                        Customize the two emails sent when someone submits an enquiry: the
+                        confirmation the customer receives, and the alert your team gets.
+                        Leave blank to use the default wording. Available placeholders:{" "}
+                        <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">{"{{customerName}}"}</code>{" "}
+                        <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">{"{{brandName}}"}</code>{" "}
+                        <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">{"{{email}}"}</code>{" "}
+                        <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">{"{{phone}}"}</code>{" "}
+                        <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">{"{{address}}"}</code>
+                    </p>
+
+                    <div className="space-y-5">
+                        <div>
+                            <p className="text-sm font-semibold text-foreground mb-3">Customer confirmation</p>
+                            <div className="space-y-4">
+                                <TextField
+                                    label="Subject"
+                                    value={form.enquiryCustomerSubject}
+                                    onChange={update("enquiryCustomerSubject")}
+                                    placeholder="Thank you for contacting {{brandName}}!"
+                                />
+                                <TextArea
+                                    label="Message"
+                                    value={form.enquiryCustomerMessage}
+                                    onChange={update("enquiryCustomerMessage")}
+                                    rows={4}
+                                    placeholder="Thank you for reaching out to us! We have successfully received your enquiry, and our team will get in touch with you shortly."
+                                />
+                            </div>
+                        </div>
+
+                        <div className="pt-5 border-t border-border">
+                            <p className="text-sm font-semibold text-foreground mb-3">Admin alert</p>
+                            <div className="space-y-4">
+                                <TextField
+                                    label="Subject"
+                                    value={form.enquiryAdminSubject}
+                                    onChange={update("enquiryAdminSubject")}
+                                    placeholder="🔔 New Customer Enquiry: {{customerName}}"
+                                />
+                                <TextField
+                                    label="Intro line"
+                                    value={form.enquiryAdminIntro}
+                                    onChange={update("enquiryAdminIntro")}
+                                    placeholder="A new customer enquiry was submitted on {{brandName}}"
+                                />
+                                <p className="text-xs text-muted-foreground">
+                                    The submitted details table (name, email, mobile, address / location, time) is always included below the intro line.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

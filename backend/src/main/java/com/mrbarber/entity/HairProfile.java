@@ -22,10 +22,8 @@ public class HairProfile {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
     private String beforeImageUrl;
 
-    @Column(nullable = false)
     private String afterImageUrl;
 
     @Column(nullable = false)

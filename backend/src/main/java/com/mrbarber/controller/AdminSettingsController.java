@@ -37,6 +37,10 @@ public class AdminSettingsController {
         if (body.getThemeId() != null && !body.getThemeId().isBlank()) {
             existing.setThemeId(body.getThemeId());
         }
+        existing.setEnquiryCustomerSubject(body.getEnquiryCustomerSubject());
+        existing.setEnquiryCustomerMessage(body.getEnquiryCustomerMessage());
+        existing.setEnquiryAdminSubject(body.getEnquiryAdminSubject());
+        existing.setEnquiryAdminIntro(body.getEnquiryAdminIntro());
         return repo.save(existing);
     }
 }

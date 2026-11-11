@@ -42,9 +42,11 @@ const request = async (path, { method = "GET", body, headers = {}, isFormData = 
 }
 
 export const api = {
-    // Auth
+    // Auth — two-step: login() sends an OTP, verifyOtp() exchanges it for a token
     login: (username, password) =>
         request("/api/auth/login", { method: "POST", body: { username, password } }),
+    verifyOtp: (username, otp) =>
+        request("/api/auth/verify-otp", { method: "POST", body: { username, otp } }),
     me: () => request("/api/auth/me"),
     changePassword: (currentPassword, newPassword) =>
         request("/api/auth/change-password", {

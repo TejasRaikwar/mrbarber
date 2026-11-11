@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -44,4 +45,9 @@ public class UserAccount {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
+
+    // ─── Login OTP (short-lived, cleared after use or expiry) ─────────────
+    /** BCrypt hash of the current one-time login code; null when none pending. */
+    private String otpCode;
+    private LocalDateTime otpExpiresAt;
 }

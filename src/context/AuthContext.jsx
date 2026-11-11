@@ -28,8 +28,14 @@ export const AuthProvider = ({ children }) => {
         fetchMe()
     }, [fetchMe])
 
-    const login = async (username, password) => {
-        const res = await api.login(username, password)
+    // Step 1: credentials check out -> an OTP is emailed; returns { otpRequired, maskedEmail }.
+    const requestOtp = async (username, password) => {
+        return api.login(username, password)
+    }
+
+    // Step 2: OTP verified -> token issued and session established.
+    const verifyOtp = async (username, otp) => {
+        const res = await api.verifyOtp(username, otp)
         tokenStore.setToken(res.token)
         await fetchMe()
         return res
@@ -41,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, logout, refresh: fetchMe }}>
+        <AuthContext.Provider value={{ user, loading, requestOtp, verifyOtp, logout, refresh: fetchMe }}>
             {children}
         </AuthContext.Provider>
     )

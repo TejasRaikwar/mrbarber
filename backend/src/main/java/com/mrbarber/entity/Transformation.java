@@ -19,10 +19,8 @@ public class Transformation {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
     private String beforeImageUrl;
 
-    @Column(nullable = false)
     private String afterImageUrl;
 
     @Column(nullable = false)

@@ -4,8 +4,11 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * One-shot legacy-schema fixups, run during bean initialization (BEFORE any
@@ -32,6 +35,46 @@ public class SchemaPatcher {
     public void patch() {
         log.info("SchemaPatcher: checking users.role column type…");
         normalizeUsersRoleColumn();
+
+        // Before/after image URLs are filled in later via the admin upload UI, so
+        // the seeder inserts them as null — but they were once mapped NOT NULL, and
+        // `ddl-auto: update` never loosens a constraint on a column that already
+        // exists, so a table created under the old mapping stays stuck rejecting
+        // those seed rows.
+        makeNullable("transformations", "before_image_url");
+        makeNullable("transformations", "after_image_url");
+        makeNullable("hair_profiles", "before_image_url");
+        makeNullable("hair_profiles", "after_image_url");
+    }
+
+    private void makeNullable(String table, String column) {
+        Map<String, Object> row;
+        try {
+            row = jdbc.queryForMap(
+                "SELECT COLUMN_TYPE, IS_NULLABLE FROM information_schema.COLUMNS " +
+                "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = ?",
+                table, column);
+        } catch (EmptyResultDataAccessException e) {
+            log.info("SchemaPatcher: {}.{} does not exist yet — Hibernate will create it nullable. Skipping.", table, column);
+            return;
+        } catch (Exception e) {
+            log.error("SchemaPatcher: could not read {}.{} column type", table, column, e);
+            throw new IllegalStateException("SchemaPatcher failed to read " + table + "." + column, e);
+        }
+
+        if ("YES".equalsIgnoreCase(String.valueOf(row.get("IS_NULLABLE")))) {
+            log.info("SchemaPatcher: {}.{} is already nullable — no patch needed.", table, column);
+            return;
+        }
+
+        String columnType = String.valueOf(row.get("COLUMN_TYPE"));
+        try {
+            jdbc.execute("ALTER TABLE " + table + " MODIFY COLUMN " + column + " " + columnType + " NULL");
+            log.info("SchemaPatcher: {}.{} converted to nullable {}.", table, column, columnType);
+        } catch (Exception e) {
+            log.error("SchemaPatcher: ALTER TABLE failed for {}.{}", table, column, e);
+            throw new IllegalStateException("SchemaPatcher failed to ALTER " + table + "." + column, e);
+        }
     }
 
     private void normalizeUsersRoleColumn() {
